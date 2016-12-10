@@ -1,0 +1,71 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 13.04.2015., 01:04:37
+    Author     : jura
+*/
+
+#zaglvalje > img{
+    visibility: collapse;
+    display: none;
+    
+}
+
+nav#meni{
+    width: 100%;
+    padding: 10px 0px;
+    
+    margin-left: auto;
+    margin-right: auto;
+}
+
+nav#meni > ul{
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+section#sadržaj{
+    margin: 150px 0px 20px 0px;
+    float: none;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    
+    
+}
+
+section#sadržaj_tablice{
+    margin: 150px 0px 20px 0px;
+    float: none;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    
+    
+}
+
+#mojaslika{
+    width: 100%;
+    float: left;
+    margin-bottom: 25px;
+}
+
+label{
+        width: 95%;
+    }
+
+select, textarea, input{
+    width: 95%;
+ }
+    
+ table{
+     visibility: hidden;
+ }
+ 
+ .prvi_stupac, .drugi_stupac{
+     visibility: visible;
+ }

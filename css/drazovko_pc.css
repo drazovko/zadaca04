@@ -1,0 +1,44 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 13.04.2015., 01:05:13
+    Author     : jura
+*/
+
+#mojaslika{
+    width: 230px;
+    float: left;
+}
+
+#osobni_podaci{
+    width: 40%;
+    float: left;
+    margin-left: 20px;
+}
+
+#biografija{
+    margin-top: 30px;
+    width: 60%;
+    float: left; 
+}
+
+#školovanja{
+    width: 20%;
+    float: left;
+    margin-left: 20px;
+}
+
+#školovanja, #upisani_predmeti, #seminari {
+    width: 95%;
+    float: left;
+    margin-top: 30px;
+    
+    margin-bottom: 20px;
+}
+
+form{
+    float: none;
+}

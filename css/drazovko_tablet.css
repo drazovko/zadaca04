@@ -1,0 +1,62 @@
+/* 
+    Created on : 13.04.2015., 01:04:55
+    Author     : jura
+*/
+nav#meni{
+    width: 98%;
+    padding: 10px;
+    margin: 15px 0px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+nav#meni > ul{
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#meni >ul li{
+    display: inline-block;
+}
+
+nav#meni > ul li a {
+   float: left;
+   padding: 11px 17px; 
+   }
+   
+#meni > ul li:first-child a {
+    border-top-left-radius: 20px;
+    border-top-right-radius: 0px;
+    border-top-style: dotted;
+}
+
+section#sadržaj{
+    margin: 150px 0px 20px 0px;
+    float: none;
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;  
+}
+
+section#sadržaj_tablice{
+    margin: 150px 0px 20px 0px;
+    float: none;
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;  
+}
+
+#školovanja, #upisani_predmeti, #seminari {
+    width: 95%;
+    
+    margin-top: 30px;
+    
+    margin-bottom: 30px;
+}
+
+
+form, #uvod, #osobna_stranica{
+    
+    float: none;
+}

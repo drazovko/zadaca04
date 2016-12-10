@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Korisnici</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <meta name="application-name" content="korisnici">
+        <meta name="author" content="Dragan Zovko">
+        <meta name="description" content="datum_kreiranja: 3.4.2015.">   
+        <link rel="stylesheet" type="text/css" href="css/drazovko.css"/>
+        <link rel="stylesheet" type="text/css" media="screen and (max-width: 450px)" href="css/drazovko_mobitel.css" />
+        <link rel="stylesheet" type="text/css" media="screen and (min-width:451px) and (max-width: 800px)" href="css/drazovko_tablet.css" />
+        <link rel="stylesheet" type="text/css" media="screen and (min-width:801px) and (max-width: 1000px)" href="css/drazovko_pc.css" />
+        <link rel="stylesheet" type="text/css" media="screen and (min-width:1001px)" href="css/drazovko_tv.css" />
+        
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+        <script src="http://datatables.net/download/build/nightly/jquery.dataTables.js"></script>
+    </head>
+    <body>
+        <header id="zaglvalje">
+            <img src="img/logo.png" alt="foi logo" id="logo" />
+            <p id="header_naslov">Zadaća 03</p>
+        </header>
+        <nav id="meni">
+            <ul>
+                <li><a href="index.html">Početna stranica</a></li>
+                <li><a href="osobna.html">O meni</a></li>
+                <li><a href="registracija.html">Registracija</a></li>
+                <li><a href="registracija_jquery.html">Registracija jquery</a></li>
+                <li><a href="prijava.html">Prijava</a></li>
+                <li><a href="korisnici.html">Korisnici</a></li>
+                <li><a href="korisnici_jquery.html">Korisnici jquery</a></li>
+                <li><a href="gen_korisnici_jquery.html">Korisnici gen. jquery</a></li>
+                <li><a href="http://www.foi.unizg.hr" target="_blank">Foi web</a></li>
+            </ul>
+        </nav>
+        <section id="sadržaj_tablice">
+            <article>
+                <h2 class="naslov_tablice">Popis aktivnih korisnika</h2>
+                <table id="tablica_korisnici"> 
+                    <thead>
+                        <tr>
+                            <th class="prvi_stupac">Ime</th><th class="drugi_stupac">Prezime</th><th>Slika</th><th>Adresa</th><th>Županija</th><th>Grad</th><th>e-mail</th><th>Korisničko ime</th><th>Lozinka</th><th>Broj telefona</th><th>Datum rođenja</th><th>Spol</th><th>Obavijesti</th>
+                        </tr>    
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="prvi_stupac">Dragan</td><td class="drugi_stupac">Zovko</td><td><img src="img/drazovko.jpg" alt="slika" width="50" height="50"></td><td>Prelčeva 2</td><td>Grad Zagreb</td><td>Grad Zagreb</td><td>drazovko@foi.hr</td><td>drazovko</td><td>bljablja</td><td>091/1234567</td><td>09.01.1972.</td><td>M</td><td>N</td>
+                        </tr>
+                        <tr>
+                            <td class="prvi_stupac">Štef</td><td class="drugi_stupac">Prvi</td><td><img src="img/drazovko.jpg" alt="slika" width="50" height="50"></td><td>Prelčeva 2</td><td>Grad Zagreb</td><td>Grad Zagreb</td><td>štef@foi.hr</td><td>drazovko</td><td>bljablja</td><td>091/1234567</td><td>09.01.1972.</td><td>M</td><td>N</td>
+                        </tr>
+                        <tr>
+                            <td class="prvi_stupac">Jura</td><td class="drugi_stupac">Drugi</td><td><img src="img/drazovko.jpg" alt="slika" width="50" height="50"></td><td>Prelčeva 2</td><td>Grad Zagreb</td><td>Grad Zagreb</td><td>jura@foi.hr</td><td>drazovko</td><td>bljablja</td><td>091/1234567</td><td>09.01.1972.</td><td>M</td><td>N</td>
+                        </tr>
+                        <tr>
+                            <td class="prvi_stupac">Marko</td><td class="drugi_stupac">Treći</td><td><img src="img/drazovko.jpg" alt="slika" width="50" height="50"></td><td>Prelčeva 2</td><td>Grad Zagreb</td><td>Grad Zagreb</td><td>marko@foi.hr</td><td>drazovko</td><td>bljablja</td><td>091/1234567</td><td>09.01.1972.</td><td>M</td><td>N</td>
+                        </tr>
+                        <tr>
+                            <td class="prvi_stupac">Željko</td><td class="drugi_stupac">Četvrti</td><td><img src="img/drazovko.jpg" alt="slika" width="50" height="50"></td><td>Prelčeva 2</td><td>Grad Zagreb</td><td>Grad Zagreb</td><td>željko@foi.hr</td><td>željko</td><td>bljablja</td><td>091/1234567</td><td>09.01.1972.</td><td>M</td><td>N</td>
+                        </tr>
+                        <tr>
+                            <td class="prvi_stupac">Silvio</td><td class="drugi_stupac">Peti</td><td><img src="img/drazovko.jpg" alt="slika" width="50" height="50"></td><td>Prelčeva 2</td><td>Grad Zagreb</td><td>Grad Zagreb</td><td>silvio@foi.hr</td><td>silvio</td><td>bljablja</td><td>091/1234567</td><td>09.01.1972.</td><td>M</td><td>N</td>
+                        </tr>
+                        <tr>
+                            <td class="prvi_stupac">Saša</td><td class="drugi_stupac">Sedmi</td><td><img src="img/drazovko.jpg" alt="slika" width="50" height="50"></td><td>Prelčeva 2</td><td>Grad Zagreb</td><td>Grad Zagreb</td><td>saša@foi.hr</td><td>saša</td><td>bljablja</td><td>091/1234567</td><td>09.01.1972.</td><td>M</td><td>N</td>
+                        </tr>
+                        <tr>
+                            <td class="prvi_stupac">Ivan</td><td class="drugi_stupac">Osmi</td><td><img src="img/drazovko.jpg" alt="slika" width="50" height="50"></td><td>Prelčeva 2</td><td>Grad Zagreb</td><td>Grad Zagreb</td><td>ivan@foi.hr</td><td>ivan</td><td>bljablja</td><td>091/1234567</td><td>09.01.1972.</td><td>M</td><td>N</td>
+                        </tr>
+                        <tr>
+                            <td class="prvi_stupac">Mario</td><td class="drugi_stupac">Deveti</td><td><img src="img/drazovko.jpg" alt="slika" width="50" height="50"></td><td>Prelčeva 2</td><td>Grad Zagreb</td><td>Grad Zagreb</td><td>mario@foi.hr</td><td>mario</td><td>bljablja</td><td>091/1234567</td><td>09.01.1972.</td><td>M</td><td>N</td>
+                        </tr>
+                        <tr>
+                            <td class="prvi_stupac">Martin</td><td class="drugi_stupac">Deseti</td><td><img src="img/drazovko.jpg" alt="slika" width="50" height="50"></td><td>Prelčeva 2</td><td>Grad Zagreb</td><td>Grad Zagreb</td><td>martin@foi.hr</td><td>martin</td><td>bljablja</td><td>091/1234567</td><td>09.01.1972.</td><td>M</td><td>N</td>
+                        </tr>
+                        <tr>
+                            <td class="prvi_stupac">Zoran</td><td class="drugi_stupac">Jedanesti</td><td><img src="img/drazovko.jpg" alt="slika" width="50" height="50"></td><td>Prelčeva 2</td><td>Grad Zagreb</td><td>Grad Zagreb</td><td>zoran@foi.hr</td><td>zoran</td><td>bljablja</td><td>091/1234567</td><td>09.01.1972.</td><td>M</td><td>N</td>
+                        </tr>
+                        <tr>
+                            <td class="prvi_stupac">Goran</td><td class="drugi_stupac">Dvanesti</td><td><img src="img/drazovko.jpg" alt="slika" width="50" height="50"></td><td>Prelčeva 2</td><td>Grad Zagreb</td><td>Grad Zagreb</td><td>goran@foi.hr</td><td>goran</td><td>bljablja</td><td>091/1234567</td><td>09.01.1972.</td><td>M</td><td>N</td>
+                        </tr>
+                        <tr>
+                            <td class="prvi_stupac">Miljenko</td><td class="drugi_stupac">Trinesti</td><td><img src="img/drazovko.jpg" alt="slika" width="50" height="50"></td><td>Prelčeva 2</td><td>Grad Zagreb</td><td>Grad Zagreb</td><td>miljenko@foi.hr</td><td>miljenko</td><td>bljablja</td><td>091/1234567</td><td>09.01.1972.</td><td>M</td><td>N</td>
+                        </tr>
+                        <tr>
+                            <td class="prvi_stupac">Ivica</td><td class="drugi_stupac">Četrnesti</td><td><img src="img/drazovko.jpg" alt="slika" width="50" height="50"></td><td>Prelčeva 2</td><td>Grad Zagreb</td><td>Grad Zagreb</td><td>ivica@foi.hr</td><td>ivica</td><td>bljablja</td><td>091/1234567</td><td>09.01.1972.</td><td>M</td><td>N</td>
+                        </tr>
+                        <tr>
+                            <td class="prvi_stupac">Marica</td><td class="drugi_stupac">Petnesti</td><td><img src="img/drazovko.jpg" alt="slika" width="50" height="50"></td><td>Prelčeva 2</td><td>Grad Zagreb</td><td>Grad Zagreb</td><td>marica@foi.hr</td><td>marica</td><td>bljablja</td><td>091/1234567</td><td>09.01.1972.</td><td>M</td><td>N</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </article>
+        </section>
+        <footer id="footer">
+            <address>
+                Kontakt:
+                <a href="mailto:drazovko@foi.hr">Dragan Zovko</a>
+                <p>Vrijeme potrebno za riješavanje aktivnog dokumenta ~ jedan sat</p>
+                <p>Vrijeme potrebno za riješavanje cijelokupnog riješenja ~ jedan dan</p>
+                <a href="http://validator.w3.org/check?uri=referer">
+                    <img src="http://4.bp.blogspot.com/-Cf1ZOzD0qJ4/VJ-gbgf4EMI/AAAAAAAAAUo/vZrtEJa_sBQ/s1600/W3C_HTML5_certified.png" alt="HTML validator" width="102" height="30"></a>
+                <a href="http://jigsaw.w3.org/css-validator/check/referer">
+                    <img src="http://3.bp.blogspot.com/-aZnVc1Yv54E/UVWLLkTNtmI/AAAAAAAAAEk/xwN9Vkkhofc/s1600/512px-Valid-css-v_(W3C_Markup_Validation_Service).svg.png" alt="css validator" width="102" height="30"></a>
+            
+            </address>
+        </footer>
+        <script src="js/drazovko_jquery.js"></script>
+    </body>
+</html>

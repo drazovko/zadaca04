@@ -1,0 +1,283 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 13.04.2015., 01:03:22
+    Author     : jura
+*/
+
+body{
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    
+    margin-left: auto;
+    margin-right: auto;
+    
+    width: 95%;
+}
+
+header{
+    background-color: red;
+    
+    color: white;
+    font-weight: bold;
+    font-size: x-large;
+    
+    padding-bottom: 1px;
+    width: 100%;
+    border: outset;
+}
+
+#header_naslov{
+    text-align: center;
+}
+
+nav#meni{
+    display: inline-block;
+    background-color: beige;
+    padding: 15px 10px 0px 0px;
+    margin: 15px 15px 10px 0px;
+    width: 180px;
+    float: left;
+}
+
+nav#meni > ul{
+    list-style: none;
+    line-height: 2;
+    margin: 0;
+    padding: 0;
+    border-color: red;
+    text-align: center;   
+    width: 180px;
+}
+
+nav#meni > ul li a {
+   display: block;
+   color: red;
+   text-decoration: none;
+   text-transform: uppercase;
+   background: #eaeaea;
+   
+   border-top-style: dotted;
+   border-width: 2px;
+   border-color: #000;
+   padding: 11px 20px; 
+}
+
+#meni > ul li a:hover{
+    color: #ffffff;
+    background-color: #f23f37;
+    border: red outset;
+    border-width: 5px;
+}
+
+#meni > ul li:first-child a {
+    border-top-left-radius: 20px;
+    border-top-right-radius: 6px;
+    border-top-style: none;
+}
+
+#meni > ul li:last-child a {
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 20px;
+}
+
+section#sadržaj{
+    margin: 15px 0px 20px 0px;
+    
+    width: 70%;
+    float: left;
+    background-color: burlywood;
+    letter-spacing: 1px;
+}
+
+section#sadržaj_tablice{
+    margin: 15px 0px 20px 0px;
+    
+    width: 70%;
+    float: left;
+    
+    letter-spacing: 1px;
+}
+
+table{
+    border: 1px outset;
+}
+
+th{
+    border: 2px outset;
+    background-color: #eaeaea;
+}
+
+td{
+    border: 1px outset;
+}
+
+#mojaslika{
+    visibility: visible;
+    display: block;
+    width: 259px;
+    height: 194px;
+}
+
+h1{
+    text-align: center;
+    padding-bottom: 30px;
+    font-size: xx-large;
+}
+
+h2, h3{
+    text-indent: 20px;
+    padding-bottom: 20px;
+}
+
+.tekst{
+    padding-bottom: 20px;
+    text-indent: 30px;
+    letter-spacing: 2px;
+    
+}
+
+
+form, #uvod, #osobna_stranica, #erapodloga {
+    
+    float: left;
+    margin: 10px;
+    
+    background-color: #eaeaea;
+    border-radius: 20px;
+    padding: 20px 20px 20px 30px;
+    border-color: #666666;
+    border-style: solid;
+    
+    
+}
+
+label{
+    color: #666666;
+    text-align: left;
+    
+    width: 35%;
+    float: left;
+    margin: 5px 0px 5px 0px; 
+    
+}
+
+select, textarea, input{
+    width: 60%;
+    margin: 5px 0px 15px 0px; 
+}
+
+.točke{
+    width: 4%;
+    margin-left: 20px;
+    margin-bottom: 15px;
+    margin-top: 10px;
+}
+
+#pretplata{
+    width: 10%;
+}
+
+#zapamti{
+    width: 10%;
+}
+
+.gumb{
+    background-color: #ccc;
+    cursor: pointer;
+    padding: 10px 10px;
+    width: 95%;
+    margin-top: 10px;
+    
+}
+
+.tekst_na_prijavi{
+    padding: 10px 15px;
+    text-indent: 30px;
+}
+
+
+#footer{
+    background-color: red;
+    text-align: center;
+    color: white;
+    width: 100%;
+    clear: both;
+    border: outset;
+    
+}
+
+table > tbody tr:hover{
+    color: #ccc;
+    background-color: #f23f37;
+    border: red outset;
+    border-width: 5px;
+    
+}
+
+table{
+    padding: 15px;
+}
+
+.naslov_tablice{
+    padding: 15px;
+}
+
+#erapodloga{
+    float: none;
+}
+
+.zasliku{
+    text-align: center;
+    
+    margin-left: auto;
+    margin-right: auto; 
+}
+
+#eradijagram, #sitemap{
+    
+    height: 200px;
+    width: 200px;
+}
+
+.točno{
+    background-color: aqua;
+}
+
+.netočno{
+    background-color: orangered;
+}
+
+#greske{
+    color: red;
+}
+
+.ui-helper-hidden-accessible {
+    display: none;
+}
+
+.ui-menu{
+    background-color: #ccc;
+    cursor: pointer;
+    width: 20%;
+}
+
+.ui-menu-item {
+    list-style: none;
+    text-align: left;
+    font-size: 130%;
+    padding-bottom:5px;
+    padding-top:5px;
+    border-bottom: 1px solid black;
+}
+
+.ui-menu-item:hover{
+    color: #ffffff;
+    background-color: #f23f37;
+    border: red outset;
+    border-width: 2px;
+    
+}
