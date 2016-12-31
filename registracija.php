@@ -91,8 +91,25 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if ($_POST["dat_rodj"]==="") {
         $greske = $greske . "Datum rođenja mora biti unesen! <br>";
     }
-    
-    
+    //Ugradnja captcha provjere
+    $captcha;
+    if(isset($_POST['g-recaptcha-response'])){
+        $captcha=$_POST['g-recaptcha-response'];
+    }
+    if(!$captcha){
+        echo '<h2>Please check the the captcha form.</h2>';
+        exit();
+    }
+    $secretKey = "6Lc7lA4UAAAAALWV4wyhXVD5tVwxlZCIBgU4N3YD";
+    $ip = $_SERVER['REMOTE_ADDR'];
+    $response=file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".$secretKey."&response=".$captcha."&remoteip=".$ip);
+    $responseKeys = json_decode($response,true);
+    if(intval($responseKeys["success"]) !== 1) {
+        echo '<h2>You are spammer ! Get the @$%K out</h2>';
+        exit();
+    } /*else {
+        $greske = $greske . "Nisi robot! <br>";
+    }   */
 } else {
     $greske = "Svi podaci moraju biti uneseni (osim slike)!";
     $ime = "";
@@ -161,6 +178,7 @@ function provjeraZauzetostiKorImenaMaila($zaProvjeru, $var2=1) {
     <head>
         <meta charset="UTF-8">
         <title></title>
+        <script src='https://www.google.com/recaptcha/api.js'></script>
     </head>
     <body>
         <head>
@@ -269,9 +287,11 @@ function provjeraZauzetostiKorImenaMaila($zaProvjeru, $var2=1) {
                     <input type="radio" name="spol" id="spol1" class="točke" value="2">Ž
                     <input type="radio" name="spol" id="spol2" class="točke" value="3" >Ne znam<br />
                 <label for="pretplata">Pretplata na mail: </label>
-                <input type="checkbox" name="pretplata" id="pretplata" value="da"/><br />    
+                <input type="checkbox" name="pretplata" id="pretplata" value="da"/><br /><br />    
+                <div align="center" class="g-recaptcha" data-sitekey="6Lc7lA4UAAAAAHriIQlNqFYCjYIJlDsppKKroNv9"></div><br />
                 <input name="registracija" type="submit" id="submit_btn" value="Slanje podataka" class="gumb" />
                 <input name="registracija" type="reset" value="Brisanje formulara" class="gumb" />
+                
             </form>
         </section>
         <footer id="footer">
