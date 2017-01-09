@@ -8,7 +8,7 @@ class baza {
     private $server = 'localhost';
     private $korisnik = 'jura';
     private $lozinka = 'jurajura';
-    private $baza = 'PzaWeb';
+    private $baza = 'WebDiP2014x074';
     private $dbc;
     private $znaci = 'utf8'; 
           

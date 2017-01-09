@@ -110,6 +110,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     } /*else {
         $greske = $greske . "Nisi robot! <br>";
     }   */
+    //Završna provjera da je sve ok
+    if ($greske == "") {
+        
+        
+        $zapis = zapisNovogKorisnikaUBazu();
+        if ($zapis === 0) {
+            echo 'Korisnik nije upisan u bazu';
+            exit();
+        }
+        header("Location: popis_korisnika.php");
+        exit();
+    }
 } else {
     $greske = "Svi podaci moraju biti uneseni (osim slike)!";
     $ime = "";
@@ -156,10 +168,10 @@ function provjeraLozinke($pass) {
 function provjeraZauzetostiKorImenaMaila($zaProvjeru, $var2=1) {
     $imeSlobodno = TRUE;
     $dbc = new baza();
-    $sql = "select maticni_broj, ime, prezime, email_adresa from polaznici "
-            . "where maticni_broj = '$zaProvjeru'";
-    $sql2 = "select maticni_broj, ime, prezime, email_adresa from polaznici "
-            . "where email_adresa = '$zaProvjeru'";
+    $sql = "select kor_ime, ime, prezime, email from korisnik "
+            . "where kor_ime = '$zaProvjeru'";
+    $sql2 = "select kor_ime, ime, prezime, email from korisnik "
+            . "where email = '$zaProvjeru'";
     if ($var2 === 1) {
         $rezultatUpita = $dbc->selectUpit($sql);
     }  else {
@@ -171,6 +183,61 @@ function provjeraZauzetostiKorImenaMaila($zaProvjeru, $var2=1) {
         $imeSlobodno = FALSE;
     }
     return $imeSlobodno;
+}
+
+function zapisNovogKorisnikaUBazu(){
+    if (isset($_POST['ime'])) {
+            $ime = $_POST['ime'];
+        }
+    if (isset($_POST['prezime'])) {
+            $prezime = $_POST['prezime'];
+    }
+    if (isset($_POST['datoteka'])) {
+        $slika = "";
+    }  else {
+        $slika = "";
+    }
+    if (isset($_POST['adresa'])) {
+        $adresa = $_POST['adresa'];
+    }
+    if (isset($_POST['zupanija'])) {
+        $zupanija = intval($_POST['zupanija']);
+    }
+    if (isset($_POST['grad'])) {
+        $grad = $_POST['grad'];
+    }
+    if (isset($_POST['mail'])) {
+        $mail = $_POST['mail'];
+    }
+    if (isset($_POST['kor_ime'])) {
+        $kor_ime = $_POST['kor_ime'];
+    }
+    if (isset($_POST['lozinka'])) {
+        $lozinka = $_POST['lozinka'];
+    }
+    if (isset($_POST['telefon'])) {
+        $telefon = $_POST['telefon'];
+    }
+    if (isset($_POST['dat_rodj'])) {
+        $dat_rod = $_POST['dat_rodj'];
+    }
+    if (isset($_POST['spol'])) {
+        $spol = $_POST['spol'];
+    }
+    if (isset($_POST['pretplata'])) {
+        $pretplata = 1;
+    }  else {
+        $pretplata = 0;
+    }
+    $datumDanas = date(DATE_ISO8601);
+    
+    $dbc = new baza();
+    
+    $sql = "INSERT INTO korisnik(  `ime` ,  `prezime` ,  `slika_link` ,  `adresa` ,  `zupanija` ,  `grad` ,  `email` ,  `kor_ime` ,  `password` ,  `telefon` ,  `datum_rodjenja` ,  `spol` , `pretplata_na_mail` ,  `uloga_iduloga` ,  `aktiviran` ,  `datum_upisa` ,  `zaključan` ) VALUES ('$ime',  '$prezime',  '$slika',  '$adresa',  '$zupanija',  '$grad',  '$mail',  '$kor_ime',  '$lozinka',  '$telefon',  '$dat_rod',  '$spol',  '$pretplata', 5, 0,  '$datumDanas', 0)";
+    
+    $rezultatUpita = $dbc->ostaliUpiti($sql);
+    
+    return $rezultatUpita;
 }
 ?>
 <!DOCTYPE html>
@@ -283,9 +350,9 @@ function provjeraZauzetostiKorImenaMaila($zaProvjeru, $var2=1) {
                 <input type="date" name="dat_rodj" id="dat_rodj"/><br />
                 
                 <label for="spol">Spol: </label>
-                <input type="radio" name="spol" id="spol" class="točke" value="1">M
-                    <input type="radio" name="spol" id="spol1" class="točke" value="2">Ž
-                    <input type="radio" name="spol" id="spol2" class="točke" value="3" >Ne znam<br />
+                <input type="radio" name="spol" id="spol" class="točke" value="M">M
+                    <input type="radio" name="spol" id="spol1" class="točke" value="Ž">Ž
+                    <input type="radio" name="spol" id="spol2" class="točke" value="O" >Ne znam<br />
                 <label for="pretplata">Pretplata na mail: </label>
                 <input type="checkbox" name="pretplata" id="pretplata" value="da"/><br /><br />    
                 <div align="center" class="g-recaptcha" data-sitekey="6Lc7lA4UAAAAAHriIQlNqFYCjYIJlDsppKKroNv9"></div><br />
