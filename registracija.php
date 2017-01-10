@@ -112,9 +112,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }   */
     //Završna provjera da je sve ok
     if ($greske == "") {
+        $aktivacijkiKod = md5(rand(1, 100000));
+        while (!provjeraZauzetostiAktivacijskogKoda($aktivacijkiKod)) {
+            $aktivacijkiKod = md5(rand(1, 100000));
+        }
         
-        
-        $zapis = zapisNovogKorisnikaUBazu();
+        $zapis = zapisNovogKorisnikaUBazu($aktivacijkiKod);
         if ($zapis === 0) {
             echo 'Korisnik nije upisan u bazu';
             exit();
@@ -185,7 +188,8 @@ function provjeraZauzetostiKorImenaMaila($zaProvjeru, $var2=1) {
     return $imeSlobodno;
 }
 
-function zapisNovogKorisnikaUBazu(){
+function zapisNovogKorisnikaUBazu($aktivacijski_kod){
+    $aktivacijskiKod = $aktivacijski_kod;
     if (isset($_POST['ime'])) {
             $ime = $_POST['ime'];
         }
@@ -233,11 +237,26 @@ function zapisNovogKorisnikaUBazu(){
     
     $dbc = new baza();
     
-    $sql = "INSERT INTO korisnik(  `ime` ,  `prezime` ,  `slika_link` ,  `adresa` ,  `zupanija` ,  `grad` ,  `email` ,  `kor_ime` ,  `password` ,  `telefon` ,  `datum_rodjenja` ,  `spol` , `pretplata_na_mail` ,  `uloga_iduloga` ,  `aktiviran` ,  `datum_upisa` ,  `zaključan` ) VALUES ('$ime',  '$prezime',  '$slika',  '$adresa',  '$zupanija',  '$grad',  '$mail',  '$kor_ime',  '$lozinka',  '$telefon',  '$dat_rod',  '$spol',  '$pretplata', 5, 0,  '$datumDanas', 0)";
+    $sql = "INSERT INTO korisnik(  `ime` ,  `prezime` ,  `slika_link` ,  `adresa` ,  `zupanija` ,  `grad` ,  `email` ,  `kor_ime` ,  `password` ,  `telefon` ,  `datum_rodjenja` ,  `spol` , `pretplata_na_mail` ,  `uloga_iduloga` ,  `aktiviran` ,  `datum_upisa` ,  `zaključan`, `aktivacijski_kod` ) VALUES ('$ime',  '$prezime',  '$slika',  '$adresa',  '$zupanija',  '$grad',  '$mail',  '$kor_ime',  '$lozinka',  '$telefon',  '$dat_rod',  '$spol',  '$pretplata', 5, 0,  '$datumDanas', 0, '$aktivacijskiKod')";
     
     $rezultatUpita = $dbc->ostaliUpiti($sql);
     
     return $rezultatUpita;
+}
+
+function provjeraZauzetostiAktivacijskogKoda($zaProvjeru) {
+    $kodSlobodan = TRUE;
+    $dbc = new baza();
+    $sql = "select kor_ime from korisnik "
+            . "where aktivacijski_kod = '$zaProvjeru'";
+    
+    $rezultatUpita = $dbc->selectUpit($sql);
+    
+    $brojRedova = $rezultatUpita->num_rows;
+    if ($brojRedova > 0) {
+        $kodSlobodan = FALSE;
+    }
+    return $kodSlobodan;
 }
 ?>
 <!DOCTYPE html>
