@@ -113,15 +113,33 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     //Završna provjera da je sve ok
     if ($greske == "") {
         $aktivacijkiKod = md5(rand(1, 100000));
+        //echo 'Generiran aktivacijski kod!</br>';
         while (!provjeraZauzetostiAktivacijskogKoda($aktivacijkiKod)) {
+            //echo 'Ponovo generiran aktivacijski kod!</br>';
             $aktivacijkiKod = md5(rand(1, 100000));
         }
-        
         $zapis = zapisNovogKorisnikaUBazu($aktivacijkiKod);
         if ($zapis === 0) {
             echo 'Korisnik nije upisan u bazu';
             exit();
+        }  else {
+            //echo 'Korisnik upisan u bazu!</br>';
         }
+        //slanje aktivacijskog e-maila sa linkom za aktivaciju korisničkog 
+        //računa na mail adresu unesenu u obrazac za registraciju
+        $korIme = $_POST['kor_ime'];
+        $mail_to = $_POST["mail"];
+        $mail_from = "From: WebDiP_2014@foi.hr";
+        $mail_subject = "Link za aktivaciju korisničkog računa";
+        $mail_body = "http://arka.foi.hr/WebDiP/2014_projekti/WebDiP2014x074/"
+                . "aktivacija.php?aktivacijskiKod=$aktivacijkiKod&korIme=$korIme";
+
+        if (mail($mail_to, $mail_subject, $mail_body, $mail_from)) {
+            //echo("Poslana poruka za: '$mail_to'!");
+        } else {
+            echo("Problem kod poruke za: '$mail_to'!");
+        }
+        
         header("Location: popis_korisnika.php");
         exit();
     }

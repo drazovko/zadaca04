@@ -6,8 +6,8 @@
  */
 class baza {
     private $server = 'localhost';
-    private $korisnik = 'jura';
-    private $lozinka = 'jurajura';
+    private $korisnik = 'WebDiP2014x074';
+    private $lozinka = 'admin_tzNK';
     private $baza = 'WebDiP2014x074';
     private $dbc;
     private $znaci = 'utf8'; 
