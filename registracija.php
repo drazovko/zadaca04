@@ -1,5 +1,6 @@
 <?php
 include 'baza.class.php';
+include 'vrijeme_sustava.php';
 
 $greske = "";
 $greska = FALSE;
@@ -251,7 +252,8 @@ function zapisNovogKorisnikaUBazu($aktivacijski_kod){
     }  else {
         $pretplata = 0;
     }
-    $datumDanas = date(DATE_ISO8601);
+    global $virtualnoVrijemeSustava;
+    $datumDanas = date(DATE_ISO8601, $virtualnoVrijemeSustava);
     
     $dbc = new baza();
     
