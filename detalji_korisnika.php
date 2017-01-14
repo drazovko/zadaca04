@@ -30,8 +30,9 @@
     
             </ul>
         </nav>
-        <section id="sadržaj">
-            <section id="osobna_stranica" > 
+        
+        <section id="sadržaj"> 
+            <section id="uvod">
             <ul>
             <?php
             include 'baza.class.php';
@@ -40,40 +41,45 @@
         
         $dbc = new baza();
         
-        $sql = "SELECT `ime`, `prezime`, `adresa`, `zupanija`, `grad`, `email`, "
+        $sql = "SELECT `ime`, `prezime`, `adresa`, županija.naziv, `grad`, `email`, "
                 . "`kor_ime`, `telefon`, `datum_rodjenja`, `spol`, `pretplata_na_mail` "
-                . "FROM `korisnik` WHERE `kor_ime` = '$korIme'";
+                . "FROM `korisnik` JOIN županija ON korisnik.zupanija = županija.idžupanije WHERE `kor_ime` = '$korIme'";
         
         $odgovor = $dbc->selectUpit($sql);
         
-        list($ime, $prezime, $adresa, $zupanija, $grad, $email, $korIme, $telefon, $datumRodjenja, $spol, $pretplataNaMail) = $odgovor->fetch_array();
-            echo "<li><a href=\"detalji_korisnika.php?korIme=$korIme\">$korIme</a></li>";
-            echo "<ul>";
-            echo "<li>$ime</li>";
-            echo "<li>$prezime</li>";
-            echo "<li>$grad</li></br>";
-            echo "</ul>";
+        list($ime, $prezime, $adresa, $zupanija, $grad, $email, $korIme2, $telefon, $datumRodjenja, $spol, $pretplataNaMail) = 
+                $odgovor->fetch_array();
         
-        
+        $slika = "";
          ?>
             <table id="glupa_tablica" >
                 <tr><td>Ime:</td><td><?php echo $ime?></td></tr>    
-                <tr><td>Prezime:</td><td><?php echo $ime?></td></tr>
-                <tr><td>Slika:</td><td><?php echo $ime?></td></tr>
-                <tr><td>Adresa:</td><td>$ime</td></tr>
-                <tr><td>Županija:</td><td>$ime</td></tr>
-                <tr><td>Grad:</td><td>$ime</td></tr>
-                <tr><td>Email:</td><td>$ime</td></tr>
-                <tr><td>Korisničko ime:</td><td>$ime</td></tr>
-                <tr><td>Lozinka:</td><td>$ime</td></tr>
-                <tr><td>Telefon:</td><td>$ime</td></tr>
-                <tr><td>Datum rodjenja:</td><td>$ime</td></tr>
-                <tr><td>Spol:</td><td>$ime</td></tr>
-                <tr><td>Pretplata na mail:</td><td>$ime</td></tr>
+                <tr><td>Prezime:</td><td><?php echo $prezime?></td></tr>
+                <tr><td>Slika:</td><td><img src="img/drazovko.jpg" alt="slika" width="50" height="50"></td></tr>
+                <tr><td>Adresa:</td><td><?php echo $adresa?></td></tr>
+                <tr><td>Županija:</td><td><?php echo $zupanija?></td></tr>
+                <tr><td>Grad:</td><td><?php echo $grad?></td></tr>
+                <tr><td>Email:</td><td><?php echo $email?></td></tr>
+                <tr><td>Korisničko ime:</td><td><?php echo $korIme?></td></tr>
+                <tr><td>Lozinka:</td><td><?php echo '**********'?></td></tr>
+                <tr><td>Telefon:</td><td><?php echo $telefon?></td></tr>
+                <tr><td>Datum rodjenja:</td><td><?php echo $datumRodjenja?></td></tr>
+                <tr><td>Spol:</td><td><?php echo $spol?></td></tr>
+                <tr><td>Pretplata na mail:</td><td>
+                    <?php 
+                    if($pretplataNaMail == 1){
+                        echo "Da";
+                    }  else {
+                        echo "Ne";
+                    }
+                    ?></td></tr>
                 
                 
                 
             </table>
+            </section>
+            </section>
+        <section id="sadržaj">
             <form action="http://arka.foi.hr/WebDiP/2014/materijali/zadace/ispis_forme.php" 
                   method="post" name="registracija" id="obrazac" enctype="multipart/form-data" >
                 <div id="greske"></div>
@@ -151,7 +157,7 @@
                 <input name="registracija" type="submit" id="submit_btn" value="Slanje podataka" class="gumb" />
                 <input name="registracija" type="reset" value="Brisanje formulara" class="gumb" />
             </form>
-        </section>
+        
             </section>
         <footer id="footer">
             <address>
