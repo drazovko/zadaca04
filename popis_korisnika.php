@@ -1,5 +1,10 @@
 <?php
-include 'aplikacijskiOkvir/baza.class.php';
+include 'aplikacijskiOkvir/aplikacijskiOkvir.php';
+
+$korisnik = provjeraUloge(ADMINISTRATOR);                          
+//$korisnik = provjeraKorisnika();
+//dnevnik_zapis("Početak aplikacije");
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -37,16 +42,16 @@ include 'aplikacijskiOkvir/baza.class.php';
             </ul>
         </nav>
         <section id="sadržaj">
-            <h1>Popis korisnika</h1>
+            <h1>Popis svih korisnika</h1>
             <section id="uvod">
-            <h3 class="podnaslov">Popis aktiviranih korisnika:</h3>
+            <h3 class="podnaslov">Popis svih korisnika:</h3>
         
             <ul>
         <?php
         $dbc = new baza();
         
-        $sql = "SELECT `kor_ime`, `ime`, `prezime`, `grad` FROM `korisnik` "
-                . "WHERE `aktiviran` = 1";
+        $sql = "SELECT `kor_ime`, `ime`, `prezime`, `grad` FROM `korisnik` ";
+               // . "WHERE `aktiviran` = 1";
         
         $odgovor = $dbc->selectUpit($sql);
         

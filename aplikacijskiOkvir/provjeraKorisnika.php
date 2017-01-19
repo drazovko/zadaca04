@@ -2,6 +2,10 @@
 
 include_once('aplikacijskiOkvir/korisnik.class.php');
 
+define('ADMINISTRATOR', 1);
+define('MODERATOR', 3);
+define('REG_KORISNIK', 5);
+
 function provjeraKorisnika() {
     $korisnik = null;
 
