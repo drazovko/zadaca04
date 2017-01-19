@@ -1,8 +1,7 @@
 <?php
-//if (true) {
-  //  header("Location: prijava.php");
-    
-//}
+include_once('aplikacijskiOkvir/aplikacijskiOkvir.php');
+$korisnik = provjeraKorisnika();
+//dnevnik_zapis("Početak aplikacije");
 ?>
 <!DOCTYPE html>
 <html>

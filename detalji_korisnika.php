@@ -1,3 +1,6 @@
+<?php
+include 'aplikacijskiOkvir/baza.class.php';
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -34,10 +37,8 @@
         <section id="sadržaj"> 
             
             
-            <?php
-            include 'baza.class.php';
-            
-            $korIme = $_GET['korIme'];
+        <?php
+        $korIme = $_GET['korIme'];
         
         $dbc = new baza();
         

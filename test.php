@@ -6,7 +6,7 @@
     </head>
     <body>
         <?php
-        require 'baza.class.php';
+        require 'aplikacijskiOkvir/baza.class.php';
         $baza = new baza();
         echo 'Baza 1 otvorena <br>';
         

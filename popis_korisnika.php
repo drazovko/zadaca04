@@ -1,3 +1,6 @@
+<?php
+include 'aplikacijskiOkvir/baza.class.php';
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -40,8 +43,6 @@
         
             <ul>
         <?php
-        include 'baza.class.php';
-        
         $dbc = new baza();
         
         $sql = "SELECT `kor_ime`, `ime`, `prezime`, `grad` FROM `korisnik` "

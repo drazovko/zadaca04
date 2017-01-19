@@ -1,34 +1,52 @@
 <?php
-include 'baza.class.php';
+include 'aplikacijskiOkvir/aplikacijskiOkvir.php';
+
+//dnevnik_zapis("Prijava korisnika");
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $korIme = $_POST['kor_ime'];
     $lozinka = $_POST['lozinka'];
+    $vrijednostKukija = "";
+    
     $greske = "";
     $brojac = 1 + $_POST['brojac'];
     
+    $korisnik = autentikacija($korIme, $lozinka);
     
-    $dbc = new baza();
+    $uri = $_SERVER["REQUEST_URI"];
+    $pos = strrpos($uri, "/");
+    $dir = $_SERVER["SERVER_NAME"] . substr($uri, 0, $pos + 1);
     
-    $sql = "select kor_ime, ime, prezime, email from korisnik "
-            . "where kor_ime = '$korIme' and password = '$lozinka'";
-    
-    $rezultatUpita = $dbc->selectUpit($sql);
-    
-    $brojRedova = $rezultatUpita->num_rows;
-    if ($brojRedova ===1) {
-        $korisnikOK = TRUE;
-        
-        header("Location: index.php");
+    if (isset($_POST['zapamti_me']) && $_POST['zapamti_me'] == "da") {
+        setcookie("WebDiP2014x074", $korIme);
+        $vrijednostKukija = $korIme;
     }  else {
+        setcookie("WebDiP2014x074", $korIme, time() - 3600);
+        $vrijednostKukija = "";
+        
+    }
+    
+    if ($korisnik->get_status() == 1) {
+        session_start();
+        $_SESSION["WebDiP2014x074"] = $korisnik;
+        $adresa = 'http://' . $dir . 'index.php';
+        header("Location: $adresa");
+        exit();
+    } else {
         $greske = "Neispravno korisničko ime ili lozinka!!!</br>";
         if ($brojac > 1) {
             $greske = $greske . "Pokušaj broj " . $brojac . "!</br>";
         }
+        
     }
 }  else {
     $greske = "";
     $brojac = 1;
+    if (isset($_COOKIE['WebDiP2014x074'])) {
+        $vrijednostKukija = $_COOKIE['WebDiP2014x074'];
+    }  else {
+        $vrijednostKukija = "";    
+    }
 }
 
 ?>
@@ -71,7 +89,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     <div id="greske"><?php echo $greske ?></div></br>
                     <label for="kor_ime">Korisničko ime: </label>
                     <input type="text" name="kor_ime" id="kor_ime" autofocus="" required=""
-                           placeholder="Korisničko ime"/><br />
+                           placeholder="Korisničko ime" value="<?php echo $vrijednostKukija;?>"/><br />
                     <label for="lozinka">Lozinka: </label>
                     <input type="password" name="lozinka" id="lozinka" required=""
                            placeholder="Lozinka"/><br />
@@ -100,6 +118,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             
             </address>
         </footer>
-        <script src="js/drazovko.js"></script>
+        <!--<script src="js/drazovko.js"></script>-->
     </body>
 </html>

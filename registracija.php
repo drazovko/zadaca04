@@ -1,6 +1,6 @@
 <?php
-include 'baza.class.php';
-include 'vrijeme_sustava.php';
+include 'aplikacijskiOkvir/baza.class.php';
+include 'aplikacijskiOkvir/vrijeme_sustava.php';
 
 $greske = "";
 $greska = FALSE;
