@@ -1,5 +1,9 @@
 <?php
-include 'aplikacijskiOkvir/baza.class.php';
+include 'aplikacijskiOkvir/aplikacijskiOkvir.php';
+
+$korisnik = provjeraUloge(ADMINISTRATOR);                          
+//$korisnik = provjeraKorisnika();
+//dnevnik_zapis("Početak aplikacije");
 ?>
 <!DOCTYPE html>
 <html>

@@ -56,7 +56,7 @@ $korisnik = provjeraUloge(ADMINISTRATOR);
         $odgovor = $dbc->selectUpit($sql);
         
         while (list($korIme, $ime, $prezime, $grad) = $odgovor->fetch_array()) {
-            echo "<li><a href=\"detalji_korisnika.php?korIme=$korIme\">$korIme</a></li>";
+            echo "<li><a href=\"detalji_korisnikaADM.php?korIme=$korIme\">$korIme</a></li>";
             echo "<ul>";
             echo "<li>$ime</li>";
             echo "<li>$prezime</li>";

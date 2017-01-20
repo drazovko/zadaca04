@@ -31,7 +31,7 @@ $korisnik = provjeraKorisnika();
                 <li><a href="registracija.html">Registracija</a></li>
                 <li><a href="registracija_jquery.html">Registracija jquery</a></li>
                 <li><a href="prijava.html">Prijava</a></li>
-                <li><a href="korisnici.html">Korisnici</a></li>
+                <li><a href="detalji_korisnikaADM.php">Korisnici</a></li>
                 <li><a href="korisnici_jquery.html">Korisnici jquery</a></li>
                 <li><a href="gen_korisnici_jquery.html">Korisnici gen. jquery</a></li>
                 <li><a href="http://www.foi.unizg.hr" target="_blank">Foi web</a></li>
