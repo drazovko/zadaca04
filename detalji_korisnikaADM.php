@@ -11,6 +11,7 @@ $greska = FALSE;
 $slika = "";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $idKorisnika = $_POST["idKorisnika"];
     $ime = $_POST["ime"];
     $prezime = $_POST["prezime"];
     $adresa = $_POST["adresa"];
@@ -26,7 +27,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $spol = $_POST["spol"];
     }
     $datumRodjenja = $_POST["dat_rodj"];
-    $pretplataNaMail = $_POST["pretplata"];
+    if (!isset($_POST["pretplata"])) {
+        $pretplataNaMail = "";
+    }  else {
+        $pretplataNaMail = $_POST["pretplata"];
+    }
     
     $bojaPoljaIme = "";
     $bojaPoljaPrezime = "";
@@ -71,7 +76,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $greske = $greske . "Korisničko ime mora biti unešeno! <br>";
         $bojaPoljaKorIme = "background: red";
     }  else {
-        if (provjeraZauzetostiKorImenaMaila($korIme)) {
+        if (provjeraZauzetostiKorImenaMaila($korIme, 1, $idKorisnika)) {
         $bojaPoljaKorIme = "background: #00ffff";
         }  else {
             $greske = $greske . "Korisničko ime je zauzeto! <br>";
@@ -82,7 +87,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $greske = $greske . "Mail mora biti unesen! <br>";
         $bojaPoljaMail = "background: red";
     }  else {
-        if (provjeraZauzetostiKorImenaMaila($mail, 2)) {
+        if (provjeraZauzetostiKorImenaMaila($mail, 2, $idKorisnika)) {
         $bojaPoljaMail = "background: #00ffff";
         }  else {
             $greske = $greske . "Mail je zauzet! <br>";
@@ -102,9 +107,30 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $greske = $greske . "Datum rođenja mora biti unesen! <br>";
     }
     
-    
+    //Završna provjera da je sve ok
+    if ($greske == "") {
+        
+        $zapis = azuriranjeKorisnika($idKorisnika);
+        if ($zapis === 0) {
+            echo 'Korisnik nije upisan u bazu';
+            exit();
+        }  
+        
+        if ($korisnik->get_vrsta() == ADMINISTRATOR){
+            header("Location: popis_korisnika.php");
+            exit();    
+        }
+        
+    }
     
 }  else {
+    $bojaPoljaIme = "";
+    $bojaPoljaPrezime = "";
+    $bojaPoljaGrad = "";
+    $bojaPoljaLozinka = "";
+    $bojaPoljaKorIme = "";
+    $bojaPoljaMail = "";
+    
     $greske = "Svi podaci moraju biti uneseni (osim slike)!";
 
     if ($korisnik->get_vrsta() == ADMINISTRATOR && isset($_GET['korIme'])) {
@@ -114,14 +140,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }       
     $dbc = new baza();
         
-    $sql = "SELECT `ime`, `prezime`, `adresa`, županija.naziv, `zupanija`, `grad`, `email`, "
+    $sql = "SELECT `idkorisnik`, `ime`, `prezime`, `adresa`, županija.naziv, `zupanija`, `grad`, `email`, "
             . "`kor_ime`, `password`, `telefon`, `datum_rodjenja`, `spol`, `pretplata_na_mail` "
             . "FROM `korisnik` JOIN županija ON korisnik.zupanija = županija.idžupanije "
             . "WHERE `kor_ime` = '$korIme'";
         
     $odgovor = $dbc->selectUpit($sql);
         
-    list($ime, $prezime, $adresa, $zupanija, $zupanijaBroj, $grad, $mail, $korIme2, 
+    list($idKorisnika, $ime, $prezime, $adresa, $zupanija, $zupanijaBroj, $grad, $mail, $korIme2, 
             $lozinka, $telefon, $datumRodjenja, $spol, $pretplataNaMail) = 
             $odgovor->fetch_array();
 }
@@ -171,6 +197,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
          ?>
             <form action="" method="post" name="registracija" id="obrazac" enctype="multipart/form-data" >
                 <div id="greske"><?php echo $greske ?></div><br>
+                <label hidden="">Id:</label>
+                <input type="text" name="idKorisnika" id="idKorisnika" 
+                       value="<?php echo $idKorisnika ?>" hidden=""/><br />
                 <label for="ime">Ime: </label>
                 <input type="text" name="ime" id="ime" size="20" maxlength="30" 
                        value="<?php echo $ime . '" style="' . $bojaPoljaIme ?>" /><br />
@@ -306,17 +335,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     </optgroup>
                 </select><br />
                 <label for="grad">Grad: </label>  
-                <input type="text" name="grad" id="grad" value="<?php echo $grad?>" /><br />
+                <input type="text" name="grad" id="grad" value="<?php echo $grad . '" style="' . $bojaPoljaGrad ?>" /><br />
                 
                 <label for="mail">Email: </label>
-                <input type="email" name="mail" id="mail" value="<?php echo $mail?>"  /><br />
+                <input type="email" name="mail" id="mail" value="<?php echo $mail . '" style="' . $bojaPoljaMail ?>"  /><br />
                 <label for="kor_ime">Korisničko ime: </label>
                 <input type="text" name="kor_ime" id="kor_ime" title="pet ili više znakova"
-                       value="<?php echo $korIme?>" /><br />
+                       value="<?php echo $korIme . '" style="' . $bojaPoljaKorIme ?>" /><br />
                 
                 <label for="lozinka">Lozinka: </label>
                 <input type="password" name="lozinka" id="lozinka" title="šest ili više znakova"
-                       value="<?php echo $lozinka?>"  /><br />
+                       value="<?php echo $lozinka . '" style="' . $bojaPoljaLozinka ?>"  /><br />
                 <label for="telefon">Telefon: </label>
                 <input type="tel" name="telefon" id="telefon" value="<?php echo $telefon?>"
                        title="Format: xxx xxxxxxx" /><br />
