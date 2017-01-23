@@ -33,11 +33,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         header("Location: $adresa");
         exit();
     } else {
-        $greske = "Neispravno korisničko ime ili lozinka!!!</br>";
-        if ($brojac > 1) {
-            $greske = $greske . "Pokušaj broj " . $brojac . "!</br>";
-        }
-        
+        if ($korisnik->get_status() == 5) {
+            $greske = "Korisnika je potrebno aktivirati prije prijavljivanja!!!</br>";
+        }  else {
+            $greske = $greske . "Neispravno korisničko ime ili lozinka!!!</br>";
+            if ($brojac > 1) {
+                $greske = $greske . "Pokušaj broj " . $brojac . "!</br>";
+            }    
+        }   
     }
 }  else {
     $greske = "";

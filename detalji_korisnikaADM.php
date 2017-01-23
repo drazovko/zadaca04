@@ -32,6 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }  else {
         $pretplataNaMail = $_POST["pretplata"];
     }
+    $aktiviran = $_POST["aktiviran"];
     
     $bojaPoljaIme = "";
     $bojaPoljaPrezime = "";
@@ -141,14 +142,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $dbc = new baza();
         
     $sql = "SELECT `idkorisnik`, `ime`, `prezime`, `adresa`, županija.naziv, `zupanija`, `grad`, `email`, "
-            . "`kor_ime`, `password`, `telefon`, `datum_rodjenja`, `spol`, `pretplata_na_mail` "
+            . "`kor_ime`, `password`, `telefon`, `datum_rodjenja`, `spol`, `pretplata_na_mail`, `aktiviran`"
             . "FROM `korisnik` JOIN županija ON korisnik.zupanija = županija.idžupanije "
             . "WHERE `kor_ime` = '$korIme'";
         
     $odgovor = $dbc->selectUpit($sql);
         
     list($idKorisnika, $ime, $prezime, $adresa, $zupanija, $zupanijaBroj, $grad, $mail, $korIme2, 
-            $lozinka, $telefon, $datumRodjenja, $spol, $pretplataNaMail) = 
+            $lozinka, $telefon, $datumRodjenja, $spol, $pretplataNaMail, $aktiviran) = 
             $odgovor->fetch_array();
 }
 
@@ -186,7 +187,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 <li><a href="osobna.html">O meni</a></li>
                 <li><a href="registracija.html">Registracija</a></li>
                 <li><a href="prijava.html">Prijava</a></li>
-                <li><a href="korisnici.html">Korisnici</a></li>
+                <?php
+                if ($korisnik->get_vrsta() == ADMINISTRATOR) {
+                    echo '<li><a href="popis_korisnika.php">Korisnici</a></li>';
+                }
+                ?>
+                <li><a href="detalji_korisnikaADM.php">Korisnik detaljno</a></li>
                 <li><a href="http://www.foi.unizg.hr" target="_blank">Foi web</a></li>
     
             </ul>
@@ -379,9 +385,39 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         $pretplataChecked = 'checked=""';
                     }
                     ?>
-                <input type="checkbox" name="pretplata" id="pretplata" value="da" <?php echo $pretplataChecked ?>/><br /><br />   
+                <input type="checkbox" name="pretplata" id="pretplata" value="1" <?php echo $pretplataChecked ?>/><br /><br />   
+                <!--<label for="aktiviran" style="display: none" >Aktiviran: </label>-->
+                <input type='text' name='aktiviran' style="display: none; visibility: hidden;" id='aktiviran' value="<?php echo $aktiviran ?>" /><br />
                 <input name="promijeni" type="submit" id="submit_btn" value="Promijeni" class="gumb" />
             </form>
+            <?php
+                if ($korisnik->get_vrsta() == ADMINISTRATOR) {
+                    if($aktiviran == "1"){
+                        $textNaAktivaciji = "Deaktiviraj";
+                        $aktiviran = 0;
+                    }  else {
+                        $textNaAktivaciji = "Aktiviraj";
+                        $aktiviran = 1;
+                    }
+                    echo "<form action='deaktivacijaAktivacija.php' method='post' name='registracija2' id='obrazac2' enctype='multipart/form-data' >";    
+                    
+                    echo '<input type="text" name="idKorisnika" id="idKorisnika" '
+                        . "value='$idKorisnika' style='display: none; visibility: hidden' /><br />";
+                    
+                    echo "<input name='aktiviraj' type='submit' id='aktiviraj_btn' "
+                    . "value='$textNaAktivaciji' class='gumb' />";
+                    
+                    echo '<input type="text" hidden="" name="kor_ime" id="kor_ime" title="pet ili više znakova"'
+                         . "value='$korIme' /><br />";
+                    
+                    echo "<input type='text' hidden='' name='aktiviranPromjena' "
+                    . "id='aktiviranPromjena' readonly='' value='$aktiviran' /><br />";
+                    
+                    echo "</form>";
+                }
+                
+                ?>
+                
             </section>
         
         <footer id="footer">

@@ -3,7 +3,8 @@ function autentikacija($user, $pass) {
     $result = -1;
     $dbc = new baza();
 
-    $sql = "select idkorisnik, kor_ime, ime, prezime, email, password, uloga_iduloga from korisnik "
+    $sql = "select idkorisnik, kor_ime, ime, prezime, email, password, "
+            . "uloga_iduloga, aktiviran from korisnik "
             . "where kor_ime = '$user'";
     
     $rezultatUpita = $dbc->selectUpit($sql);
@@ -19,13 +20,18 @@ function autentikacija($user, $pass) {
     $korisnik = new Korisnik();
 
     if ($brojRedova == 1) {
-        list($idKorisnika, $korIme, $ime, $prezime, $mail, $password, $uloga_iduloga) = $rezultatUpita->fetch_array();
+        list($idKorisnika, $korIme, $ime, $prezime, $mail, $password, $uloga_iduloga, 
+                $aktiviran) = $rezultatUpita->fetch_array();
 
         if ($password == $pass) {
-            $korisnik->setDioPodataka($idKorisnika, $ime, $prezime, $mail, $password, $korIme, 
-                    $uloga_iduloga);
-
-            $result = 1;
+            
+            if ($aktiviran == 1) {
+                $korisnik->setDioPodataka($idKorisnika, $ime, $prezime, $mail, $password, $korIme, 
+                    $uloga_iduloga, $aktiviran);
+                $result = 1;
+            }  else {
+                $result = 5;
+            } 
         } else {
             $result = 0;
         }

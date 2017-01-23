@@ -2,7 +2,6 @@
 include 'aplikacijskiOkvir/aplikacijskiOkvir.php';
 
 $korisnik = provjeraUloge(ADMINISTRATOR);                          
-//$korisnik = provjeraKorisnika();
 //dnevnik_zapis("Početak aplikacije");
 
 ?>

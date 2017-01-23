@@ -152,15 +152,75 @@ function azuriranjeKorisnika($idKorisnika){
     }  else {
         $pretplata = 0;
     }
-    global $virtualnoVrijemeSustava;
-    $datumDanas = date(DATE_ISO8601, $virtualnoVrijemeSustava);
+    if (isset($_POST['aktiviran'])) {
+        $aktiviran = $_POST['aktiviran'];
+    }
+  
+    $dbc2 = new baza();
+        
+    $sql2 = "SELECT `idkorisnik`, `ime`, `prezime`, `adresa`, županija.naziv, `zupanija`, `grad`, `email`, "
+            . "`kor_ime`, `password`, `telefon`, `datum_rodjenja`, `spol`, `pretplata_na_mail`, `aktiviran`"
+            . "FROM `korisnik` JOIN županija ON korisnik.zupanija = županija.idžupanije "
+            . "WHERE `idkorisnik` = '$idKorisnika'";
+        
+    $odgovor2 = $dbc2->selectUpit($sql2);
+        
+    if (!$odgovor2) {
+        echo 'Problem kod upita na bazu podataka!';
+        exit();
+        //trigger_error("Problem kod upita na bazu podataka!", E_USER_ERROR);
+    }
+    
+    list($idKorisnika2, $ime2, $prezime2, $adresa2, $zupanija2, $zupanijaBroj2, $grad2, $mail2, 
+            $korIme22, $lozinka2, $telefon2, $datumRodjenja2, $spol2, $pretplataNaMail2, $aktiviran2) = 
+            $odgovor2->fetch_array();
+    
+    
+    global $greske;
+    if ($ime2 != $ime) {
+        $greske = "Ime je promijenjeno: " . $ime2 . " - " . $ime ." </br>";
+    }
+    if ($prezime2 != $prezime) {
+        $greske = $greske . "Prezime je promijenjeno: " . $prezime2 . " - " . $prezime ." </br>";
+    }
+    if ($adresa2 != $adresa) {
+        $greske = $greske . "Adresa je promijenjena: " . $adresa2 . " - " . $adresa ." </br>";
+    }
+    if ($zupanijaBroj2 != $zupanija) {
+        $greske = $greske . "Županija je promijenjena. " ." </br>";
+    }
+    if ($grad2 != $grad) {
+        $greske = $greske . "Grad je promijenjen: " . $grad2 . " - " . $grad ." </br>";
+    }
+    if ($mail2 != $mail) {
+        $greske = $greske . "Email je promijenjen: " . $mail2 . " - " . $mail ." </br>";
+    }
+    if ($korIme22 != $kor_ime) {
+        $greske = $greske . "Kor.ime je promijenjeno: " . $korIme22 . " - " . $kor_ime ." </br>";
+    }
+    if ($lozinka2 != $lozinka) {
+        $greske = $greske . "Lozinka je promijenjena." . " </br>";
+    }
+    if ($telefon2 != $telefon) {
+        $greske = $greske . "Telefon je promijenjen: " . $telefon2 . " - " . $telefon ." </br>";
+    }
+    if ($datumRodjenja2 != $dat_rod) {
+        $greske = $greske . "Dat.rođenja je promijenjen: " . $datumRodjenja2 . " - " . $dat_rod ." </br>";
+    }
+    if ($spol2 != $spol) {
+        $greske = $greske . "Spol je promijenjen: " . $spol2 . " - " . $spol ." </br>";
+    }
+    if ($pretplataNaMail2 != $pretplata) {
+        $greske = $greske . "Pretplata je promijenjena." . " </br>";
+    }
     
     $dbc = new baza();
     
     $sql = "UPDATE korisnik SET `ime`='$ime',`prezime`='$prezime',`slika_link`='$slika',"
             . "`adresa`='$adresa',`zupanija`='$zupanija',`grad`='$grad',`email`='$mail',"
             . "`kor_ime`='$kor_ime',`password`='$lozinka',`telefon`='$telefon',"
-            . "`datum_rodjenja`='$dat_rod',`spol`='$spol',`pretplata_na_mail`='$pretplata' "
+            . "`datum_rodjenja`='$dat_rod',`spol`='$spol',`pretplata_na_mail`='$pretplata', "
+            . "`aktiviran`='$aktiviran' "
             . "WHERE idkorisnik = $idKorisnika";
     
     

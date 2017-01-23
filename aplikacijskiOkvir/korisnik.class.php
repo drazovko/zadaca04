@@ -29,7 +29,7 @@ class Korisnik {
     }
 
     public function setDioPodataka($p_idKorisnika, $p_ime, $p_prezime, $mail, $p_lozinka, 
-            $p_kor_ime, $p_uloga_iduloga) {
+            $p_kor_ime, $p_uloga_iduloga, $p_aktiviran) {
         $this->idKorisnika = $p_idKorisnika;
         $this->ime = $p_ime;
         $this->prezime = $p_prezime;
@@ -37,6 +37,7 @@ class Korisnik {
         $this->password = $p_lozinka;
         $this->kor_ime = $p_kor_ime;
         $this->uloga_iduloga = $p_uloga_iduloga;
+        $this->aktiviran = $p_aktiviran;
         $this->prijavljen_od = time();
         $this->status = 0;
         $this->adresa = $_SERVER["REMOTE_ADDR"];
@@ -68,6 +69,10 @@ class Korisnik {
 
     public function get_vrsta() {
         return $this->uloga_iduloga;
+    }
+    
+    public function get_aktiviran() {
+        return $this->aktiviran;
     }
 
     public function get_prijavljen_od() {
