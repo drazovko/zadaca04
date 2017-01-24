@@ -1,10 +1,10 @@
 <?php
 include 'aplikacijskiOkvir/aplikacijskiOkvir.php';
-include 'aplikacijskiOkvir/vrijeme_sustava.php';
 include 'aplikacijskiOkvir/provjereKodUnosaKor.php';
 
 $korisnik = provjeraKorisnika();                          
-//dnevnik_zapis("Uspješna autorizacija");
+//dnevnik_zapis("Detalji korisnika");
+//dnevnik zapis spušten niže da ulovi korIme
 
 $greske = "";
 $greska = FALSE;
@@ -20,6 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $lozinka = $_POST["lozinka"];
     $mail = $_POST["mail"];
     $korIme = $_POST["kor_ime"];
+    dnevnik_zapis("Detalji korisnika $korIme");
     $telefon = $_POST["telefon"];
     if (!isset($_POST["spol"])) {
         $spol = "";
@@ -138,7 +139,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $korIme = $_GET['korIme'];
     }  else {
         $korIme = $korisnik->get_kor_ime();
-    }       
+    }     
+    dnevnik_zapis("Detalji korisnika $korIme");
     $dbc = new baza();
         
     $sql = "SELECT `idkorisnik`, `ime`, `prezime`, `adresa`, županija.naziv, `zupanija`, `grad`, `email`, "
@@ -180,19 +182,23 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <header id="zaglvalje">
             <img src="img/logo.png" alt="foi logo" id="logo" />
             <p id="header_naslov">Zadaća 04 - administrator</p>
+            <p align="right"><a href="logout.php">Odjava </a></p>
         </header>
         <nav id="meni">
             <ul>
-                <li><a href="index.html">Početna stranica</a></li>
+                <li><a href="index.php">Početna stranica</a></li>
                 <li><a href="osobna.html">O meni</a></li>
-                <li><a href="registracija.html">Registracija</a></li>
-                <li><a href="prijava.html">Prijava</a></li>
+                <li><a href="registracija.php">Registracija</a></li>
+                <li><a href="prijava.php">Prijava</a></li>
                 <?php
                 if ($korisnik->get_vrsta() == ADMINISTRATOR) {
                     echo '<li><a href="popis_korisnika.php">Korisnici</a></li>';
+                    echo '<li><a href="http://arka.foi.hr/PzaWeb/PzaWeb2004/config/vrijeme.html" '
+                    . 'target="_blank">Postavi vrijeme sustava</a></li>';  
+                    
                 }
                 ?>
-                <li><a href="detalji_korisnikaADM.php">Korisnik detaljno</a></li>
+                <li><a href="detalji_korisnikaADM.php">Detalji korisika</a></li>
                 <li><a href="http://www.foi.unizg.hr" target="_blank">Foi web</a></li>
     
             </ul>

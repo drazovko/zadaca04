@@ -1,7 +1,7 @@
 <?php
-//include_once('aplikacijskiOkvir/aplikacijskiOkvir.php');
+include_once('aplikacijskiOkvir/aplikacijskiOkvir.php');
 
-//dnevnik_zapis("Odjava korisnika");
+dnevnik_zapis("Odjava korisnika");
 
 
 session_start();

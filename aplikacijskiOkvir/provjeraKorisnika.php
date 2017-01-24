@@ -34,5 +34,6 @@ function provjeraUloge($uloga) {
         header("Location: error.php?e=2");
         exit();
     }
+    return $korisnik;
 }
 ?>

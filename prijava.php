@@ -1,15 +1,17 @@
 <?php
 include 'aplikacijskiOkvir/aplikacijskiOkvir.php';
 
-//dnevnik_zapis("Prijava korisnika");
+//dnevnik zapis premješten niže da ulovi brojač pokušaja
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $brojac = 1 + $_POST['brojac'];
+    dnevnik_zapis("Pokušaj prijave br.$brojac");
     $korIme = $_POST['kor_ime'];
     $lozinka = $_POST['lozinka'];
     $vrijednostKukija = "";
     
     $greske = "";
-    $brojac = 1 + $_POST['brojac'];
+    
     
     $korisnik = autentikacija($korIme, $lozinka);
     
@@ -45,6 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 }  else {
     $greske = "";
     $brojac = 1;
+    dnevnik_zapis("Pokušaj prijave br.$brojac");
     if (isset($_COOKIE['WebDiP2014x074'])) {
         $vrijednostKukija = $_COOKIE['WebDiP2014x074'];
     }  else {
@@ -77,9 +80,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <ul>
                 <li><a href="index.php">Početna stranica</a></li>
                 <li><a href="osobna.html">O meni</a></li>
-                <li><a href="registracija.html">Registracija</a></li>
-                <li><a href="prijava.html">Prijava</a></li>
-                <li><a href="korisnici.html">Korisnici</a></li>
+                <li><a href="registracija.php">Registracija</a></li>
+                <li><a href="prijava.php">Prijava</a></li>
                 <li><a href="http://www.foi.unizg.hr" target="_blank">Foi web</a></li>
     
             </ul>
@@ -105,7 +107,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 </form>
             </article>
             <article class="tekst_na_prijavi">
-                Registriraj se <a href="registracija.html">ovdje</a>
+                Registriraj se <a href="registracija.php">ovdje</a>
             </article>
         </section>
         <footer id="footer">

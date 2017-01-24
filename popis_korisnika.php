@@ -2,7 +2,7 @@
 include 'aplikacijskiOkvir/aplikacijskiOkvir.php';
 
 $korisnik = provjeraUloge(ADMINISTRATOR);                          
-//dnevnik_zapis("Početak aplikacije");
+dnevnik_zapis("Popis svih korisnika");
 
 ?>
 <!DOCTYPE html>
@@ -25,17 +25,23 @@ $korisnik = provjeraUloge(ADMINISTRATOR);
             
             <img src="img/logo.png" alt="foi logo" id="logo" />
             <p id="header_naslov">Zadaća 04</p>
+            <p align="right"><a href="logout.php">Odjava </a></p>
         </header>
         <nav id="meni">
             <ul>
-                <li><a href="index.html">Početna stranica</a></li>
+                <li><a href="index.php">Početna stranica</a></li>
                 <li><a href="osobna.html">O meni</a></li>
-                <li><a href="registracija.html">Registracija</a></li>
-                <li><a href="registracija_jquery.html">Registracija jquery</a></li>
-                <li><a href="prijava.html">Prijava</a></li>
-                <li><a href="korisnici.html">Korisnici</a></li>
-                <li><a href="korisnici_jquery.html">Korisnici jquery</a></li>
-                <li><a href="gen_korisnici_jquery.html">Korisnici gen. jquery</a></li>
+                <li><a href="registracija.php">Registracija</a></li>
+                <li><a href="prijava.php">Prijava</a></li>
+                <?php
+                if ($korisnik->get_vrsta() == ADMINISTRATOR) {
+                    echo '<li><a href="popis_korisnika.php">Korisnici</a></li>';
+                    echo '<li><a href="http://arka.foi.hr/PzaWeb/PzaWeb2004/config/vrijeme.html" '
+                    . 'target="_blank">Postavi vrijeme sustava</a></li>';  
+                    
+                }
+                ?>
+                <li><a href="detalji_korisnikaADM.php">Detalji korisika</a></li>
                 <li><a href="http://www.foi.unizg.hr" target="_blank">Foi web</a></li>
     
             </ul>

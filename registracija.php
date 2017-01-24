@@ -1,7 +1,8 @@
 <?php
 include 'aplikacijskiOkvir/aplikacijskiOkvir.php';
-//include 'aplikacijskiOkvir/vrijeme_sustava.php';
 include 'aplikacijskiOkvir/provjereKodUnosaKor.php';
+
+dnevnik_zapis("Registracija korisnika");
 
 $greske = "";
 $greska = FALSE;
@@ -194,13 +195,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </header>
         <nav id="meni">
             <ul>
-                <li><a href="index.html">Početna stranica</a></li>
+                <li><a href="index.php">Početna stranica</a></li>
                 <li><a href="osobna.html">O meni</a></li>
-                <li><a href="registracija.html">Registracija</a></li>
-                <li><a href="prijava.html">Prijava</a></li>
-                <li><a href="korisnici.html">Korisnici</a></li>
+                <li><a href="registracija.php">Registracija</a></li>
+                <li><a href="prijava.php">Prijava</a></li>
                 <li><a href="http://www.foi.unizg.hr" target="_blank">Foi web</a></li>
-    
             </ul>
         </nav>
         <section id="sadržaj">

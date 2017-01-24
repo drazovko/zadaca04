@@ -1,8 +1,7 @@
 <?php
 include_once('aplikacijskiOkvir/aplikacijskiOkvir.php');
 
-//dnevnik_zapis("Neuspješna autorizacija");
-//zatvoriBazuPodataka();
+dnevnik_zapis("Neuspješna autorizacija");
 ?>
 <!DOCTYPE html>
 <html>

@@ -1,6 +1,7 @@
 <?php
 include 'aplikacijskiOkvir/baza.class.php';
-include 'aplikacijskiOkvir/vrijeme_sustava.php';
+
+dnevnik_zapis("Aktivacija preko linka");
 
 $korIme = $_GET['korIme'];
 $aktivacijskiKod = $_GET['aktivacijskiKod'];
@@ -58,4 +59,3 @@ $brojRedova = $odgovor->num_rows;
         
         }
     }
-    return $odgovor;
