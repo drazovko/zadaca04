@@ -22,6 +22,7 @@ class Korisnik {
     private $zaključan;
     private $aktivacijski_kod;
     private $prijavljen_od;
+    private $posljednja_uspjesna_prijava;
     private $status = 0;
 
     public function Korisnik() {
@@ -46,7 +47,7 @@ class Korisnik {
     public function set_status($p_status) {
         $this->status = $p_status;
     }
-
+    
     public function get_status() {
         return $this->status;
     }
@@ -79,6 +80,14 @@ class Korisnik {
         return date("d.m.Y H:i:s", $this->prijavljen_od);
     }
 
+    public function set_posljednja_uspjesna_prijava($p_date_time) {
+        $this->posljednja_uspjesna_prijava = $p_date_time;
+    }
+    
+    public function get_posljednja_uspjesna_prijava() {
+        return $this->posljednja_uspjesna_prijava;
+    }
+    
     public function get_aktivan() {
         return time() - $this->prijavljen_od;
     }

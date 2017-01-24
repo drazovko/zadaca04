@@ -24,6 +24,20 @@ dnevnik_zapis("Početak aplikacije");
             <img src="img/logo.png" alt="foi logo" id="logo" />
             <p id="header_naslov">Zadaća 05</p>
             <p align="right"><a href="logout.php">Odjava </a></p>
+            <p class="header_poruka">
+                Pozdrav korisniku: <b>
+            <?php
+            echo $korisnik->get_ime_prezime() . " </b> koji je prijavljen od: " . $korisnik->get_prijavljen_od() .
+            " i aktivan : " . $korisnik->get_aktivan() . " sek";
+            ?>
+            </p>
+            <p class="header_poruka">
+                Posljednja uspješna prijava korisnika <b>
+            <?php
+            echo $korisnik->get_ime_prezime() . " </b> je bila: " 
+                    . $korisnik->get_posljednja_uspjesna_prijava();
+            ?>
+            </p>
         </header>
         <nav id="meni">
             <ul>

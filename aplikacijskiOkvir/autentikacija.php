@@ -28,6 +28,18 @@ function autentikacija($user, $pass) {
             if ($aktiviran == 1) {
                 $korisnik->setDioPodataka($idKorisnika, $ime, $prezime, $mail, $password, $korIme, 
                     $uloga_iduloga, $aktiviran);
+                
+                $dbc2 = new baza();
+
+                $sql2 = "SELECT `virtualno_vrijeme` from dnevnik WHERE `korisnik` = '$user' "
+                        . "AND `tekst` = 'Uspješno logiranje' ORDER BY virtualno_vrijeme desc LIMIT 1";
+                
+                $rezultatUpita2 = $dbc2->selectUpit($sql2);
+                
+                list($vrijeme) = $rezultatUpita2->fetch_array();
+                
+                $korisnik->set_posljednja_uspjesna_prijava($vrijeme);
+                
                 $result = 1;
             }  else {
                 $result = 5;

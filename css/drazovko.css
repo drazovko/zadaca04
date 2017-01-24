@@ -9,6 +9,8 @@ and open the template in the editor.
 */
 
 body{
+    background-color: darkgrey;
+    background-image: url("../img/westeros-essos-map.jpg");
     font-family: Helvetica, Arial, sans-serif;
     font-size: 13px;
     
@@ -22,7 +24,7 @@ header{
     background-color: red;
     
     color: white;
-    font-weight: bold;
+    
     font-size: x-large;
     
     padding-bottom: 1px;
@@ -31,7 +33,13 @@ header{
 }
 
 #header_naslov{
+    font-weight: bold;
     text-align: center;
+}
+
+.header_poruka{
+    text-align: center;
+    font-size: large;
 }
 
 nav#meni{
