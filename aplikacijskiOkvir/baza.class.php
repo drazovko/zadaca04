@@ -25,7 +25,7 @@ class baza {
     function selectUpit($sql) {
         $odgovor = $this->dbc->query($sql);
         if (!$odgovor) {
-            echo 'Problem kod upita na bazu podataka!';
+            echo 'Problem kod upita na bazu podataka select upit!';
             exit();
         }
         return $odgovor;
@@ -34,7 +34,7 @@ class baza {
     function ostaliUpiti($sql) {
         $odgovor = $this->dbc->query($sql);
         if (!$odgovor) {
-            echo 'Problem kod upita na bazu podataka!';
+            echo 'Problem kod upita na bazu podataka ostali upiti!';
             exit();
         }
         return $odgovor;

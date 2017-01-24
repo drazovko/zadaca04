@@ -45,7 +45,6 @@ function provjeraZauzetostiKorImenaMaila($zaProvjeru, $var2=1, $id=0) {
             if ($id === $idKorisnika) {
                 $imeSlobodno = TRUE;
             }
-            echo 'ID = ' . $id;
         }
     }
     return $imeSlobodno;

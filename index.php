@@ -1,7 +1,7 @@
 <?php
 include_once('aplikacijskiOkvir/aplikacijskiOkvir.php');
 $korisnik = provjeraKorisnika();
-//dnevnik_zapis("Početak aplikacije");
+dnevnik_zapis("Početak aplikacije");
 ?>
 <!DOCTYPE html>
 <html>
@@ -23,6 +23,7 @@ $korisnik = provjeraKorisnika();
             
             <img src="img/logo.png" alt="foi logo" id="logo" />
             <p id="header_naslov">Zadaća 05</p>
+            <p align="right"><a href="logout.php">Odjava</a></p>
         </header>
         <nav id="meni">
             <ul>

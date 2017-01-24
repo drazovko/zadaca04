@@ -75,7 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </header>
         <nav id="meni">
             <ul>
-                <li><a href="index.html">Početna stranica</a></li>
+                <li><a href="index.php">Početna stranica</a></li>
                 <li><a href="osobna.html">O meni</a></li>
                 <li><a href="registracija.html">Registracija</a></li>
                 <li><a href="prijava.html">Prijava</a></li>

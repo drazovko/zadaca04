@@ -1,6 +1,6 @@
 <?php
 include 'aplikacijskiOkvir/aplikacijskiOkvir.php';
-include 'aplikacijskiOkvir/vrijeme_sustava.php';
+//include 'aplikacijskiOkvir/vrijeme_sustava.php';
 include 'aplikacijskiOkvir/provjereKodUnosaKor.php';
 
 $greske = "";
