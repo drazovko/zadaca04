@@ -22,7 +22,7 @@ dnevnik_zapis("Početak aplikacije");
         <header id="zaglvalje" >
             
             <img src="img/logo.png" alt="foi logo" id="logo" />
-            <p id="header_naslov">Zadaća 05</p>
+            <p id="header_naslov">Legalizacija</p>
             <p align="right"><a href="logout.php">Odjava </a></p>
             <p class="header_poruka">
                 Pozdrav korisniku: <b>

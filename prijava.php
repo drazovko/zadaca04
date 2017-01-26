@@ -75,7 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <body>
         <header id="zaglvalje">
             <img src="img/logo.png" alt="foi logo" id="logo" />
-            <p id="header_naslov">Zadaća 03</p>
+            <p id="header_naslov">Legalizacija</p>
         </header>
         <nav id="meni">
             <ul>

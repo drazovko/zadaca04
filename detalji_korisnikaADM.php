@@ -181,7 +181,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <body>
         <header id="zaglvalje">
             <img src="img/logo.png" alt="foi logo" id="logo" />
-            <p id="header_naslov">Zadaća 04 - administrator</p>
+            <p id="header_naslov">Legalizacija</p>
             <p align="right"><a href="logout.php">Odjava </a></p>
         </header>
         <nav id="meni">
