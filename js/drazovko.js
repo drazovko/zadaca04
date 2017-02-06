@@ -33,7 +33,7 @@ var doc_ok = false;
 
 
 
-provjera_lozinke.addEventListener("blur", function (e) { lozinka_test(lozinka); });
+//provjera_lozinke.addEventListener("blur", function (e) { lozinka_test(lozinka); });
 provjera_grada.addEventListener("blur", function (e) { veliko_slovo(grad); });
 provjera_imena.addEventListener("keypress", function (e) { veliko_slovo(ime); });
 provjera_prezimena.addEventListener("keypress", function (e) { veliko_slovo(prezime); });

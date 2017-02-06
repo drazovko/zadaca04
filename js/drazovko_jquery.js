@@ -7,10 +7,10 @@
 
 $(document).ready(function() {
     $("#kor_ime").focusout(function (e) {provjera_kor_imena("kor_ime");});
-    $("#ime").focusout(function (e) {provjera_ime_i_prezime("ime");});
-    $("#prezime").focusout(function (e) {provjera_ime_i_prezime("prezime");});
+    //$("#ime").focusout(function (e) {provjera_ime_i_prezime("ime");});
+    //$("#prezime").focusout(function (e) {provjera_ime_i_prezime("prezime");});
     $("#lozinka").focusout(function (e) {provjera_lozinka("lozinka");});
-    
+    /*
     var gradovi = new Array();
 
     $.getJSON("http://arka.foi.hr/WebDiP/2014/materijali/zadace/dz3_dio2/gradovi.json",
@@ -89,7 +89,7 @@ $(document).ready(function() {
         
     }    
     );
-    
+    */
     
 } );
 
@@ -121,7 +121,7 @@ function provjera_lozinka(ulaz){
                     }
 }
 
-
+/*
 function provjera_ime_i_prezime(ulaz){
     var Ime = $('#ime').val();
     var Prezime = $('#prezime').val();
@@ -179,7 +179,7 @@ Korisnik ima korisničko ime: " + zauzeto + "<hr>");
             }
           );
 }
-
+*/
 
 
 function provjera_kor_imena(ulaz){
@@ -197,7 +197,7 @@ function provjera_kor_imena(ulaz){
     $.ajax(
             {
                 type: "GET",
-                url: "http://arka.foi.hr/WebDiP/2014/materijali/zadace/dz3_dio2/korisnik.php",
+                url: "php_xml/reg_kor_ime_jquery.php",
                 dataType: 'xml',
                 data:{
                     'korisnik': korIme
@@ -205,6 +205,7 @@ function provjera_kor_imena(ulaz){
                 success: function (data) {
                     var zauzeto = $(data).find('korisnik').text();
                     console.log("zauzeto = " + zauzeto);
+                    console.log("Korisnik: " + korIme);
                     if(zauzeto == 1){
                         $('#kor_ime').css("background-color", "orangered");
                         $("#kor_ime").effect("highlight", 3000);
