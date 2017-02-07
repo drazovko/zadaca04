@@ -112,12 +112,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 <p class="tekst_na_prijavi">Ako imate pravo pristupa, moći ćete pristupiti ovoj stranici nakon što se prijavite.</p>
                 <form action="" method="post" name="prijava" id="prijava" enctype="multipart/form-data">
                     <div id="greske"><?php echo $greske ?></div></br>
+                    <div id="konzola"></div>
                     <label for="kor_ime">Korisničko ime: </label>
                     <input type="text" name="kor_ime" id="kor_ime" autofocus="" required=""
                            placeholder="Korisničko ime" value="<?php echo $vrijednostKukija;?>"/><br />
                     <label for="lozinka">Lozinka: </label>
                     <input type="password" name="lozinka" id="lozinka" required=""
                            placeholder="Lozinka"/><br />
+                    <label></label><a name="zaboravljenaL" id="zaboravljenaL" href="">Zaboravljena lozinka</a><br><br />
                     <label for="zapamti">Zapamti me: </label>
                     
                     <input type="checkbox" name="zapamti_me" id="zapamti" value="da"/><br />
@@ -143,6 +145,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             
             </address>
         </footer>
+        
+        <script src="js/zaboravljenaLozinka.js"></script>
         <!--<script src="js/drazovko.js"></script>-->
     </body>
 </html>
