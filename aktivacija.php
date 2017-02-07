@@ -1,5 +1,5 @@
 <?php
-include 'aplikacijskiOkvir/baza.class.php';
+include 'aplikacijskiOkvir/aplikacijskiOkvir.php';
 
 dnevnik_zapis("Aktivacija preko linka");
 

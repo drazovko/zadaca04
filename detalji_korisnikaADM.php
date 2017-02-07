@@ -420,7 +420,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     . "id='aktiviranPromjena' readonly='' value='$aktiviran' /><br />";
                     
                     echo "</form>";
-                }
+                
+                    
+                    
+                    }
                 
                 ?>
                 

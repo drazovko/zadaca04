@@ -143,7 +143,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             echo("Problem kod poruke za: '$mail_to'!");
         }
         
-        header("Location: popis_korisnika.php");
+        header("Location: prijava.php");
         exit();
     }
 } else {

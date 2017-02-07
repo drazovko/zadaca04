@@ -36,14 +36,31 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         header("Location: $adresa");
         exit();
     } else {
-        if ($korisnik->get_status() == 5) {
+        if ($korisnik->get_status() == 6) {
+            $greske = "Korisnik je blokiran.</br>";
+            $brojac = 1;
+        }  else {
+            if ($korisnik->get_status() == 5) {
             $greske = "Korisnika je potrebno aktivirati prije prijavljivanja!!!</br>";
         }  else {
             $greske = $greske . "Neispravno korisničko ime ili lozinka!!!</br>";
+            if ($brojac > 3) {
+                if($korisnik->get_status() == -1){
+                    $greske = $greske . "Korisnik: " . $korIme . " ne postoji!!!</br>";
+                }
+                if($korisnik->get_status() == 0){
+                    zakljucavanjeKorisnika($korIme);
+                    $greske = $greske . "Korisnik: " . $korIme . " je blokiran!!!</br>";
+                    $brojac = 1;
+                }
+            }
             if ($brojac > 1) {
                 $greske = $greske . "Pokušaj broj " . $brojac . "!</br>";
-            }    
-        }   
+            }   
+            
+        }
+        }
+           
     }
 }  else {
     $greske = "";
@@ -55,6 +72,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $vrijednostKukija = "";    
     }
 }
+
+
+
 
 ?>
 <!DOCTYPE html>
