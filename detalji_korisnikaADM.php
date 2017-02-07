@@ -35,6 +35,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
     $aktiviran = $_POST["aktiviran"];
     
+    $zakljucan = $_POST["zakljucan"];
+    
     $bojaPoljaIme = "";
     $bojaPoljaPrezime = "";
     $bojaPoljaGrad = "";
@@ -144,14 +146,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $dbc = new baza();
         
     $sql = "SELECT `idkorisnik`, `ime`, `prezime`, `adresa`, županija.naziv, `zupanija`, `grad`, `email`, "
-            . "`kor_ime`, `password`, `telefon`, `datum_rodjenja`, `spol`, `pretplata_na_mail`, `aktiviran`"
+            . "`kor_ime`, `password`, `telefon`, `datum_rodjenja`, `spol`, `pretplata_na_mail`, `aktiviran`, `zaključan`"
             . "FROM `korisnik` JOIN županija ON korisnik.zupanija = županija.idžupanije "
             . "WHERE `kor_ime` = '$korIme'";
         
     $odgovor = $dbc->selectUpit($sql);
         
     list($idKorisnika, $ime, $prezime, $adresa, $zupanija, $zupanijaBroj, $grad, $mail, $korIme2, 
-            $lozinka, $telefon, $datumRodjenja, $spol, $pretplataNaMail, $aktiviran) = 
+            $lozinka, $telefon, $datumRodjenja, $spol, $pretplataNaMail, $aktiviran, $zakljucan) = 
             $odgovor->fetch_array();
 }
 
@@ -393,9 +395,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     ?>
                 <input type="checkbox" name="pretplata" id="pretplata" value="1" <?php echo $pretplataChecked ?>/><br /><br />   
                 <!--<label for="aktiviran" style="display: none" >Aktiviran: </label>-->
-                <input type='text' name='aktiviran' style="display: none; visibility: hidden;" id='aktiviran' value="<?php echo $aktiviran ?>" /><br />
+                
+                <input type='text' name='zakljucan' style="display: none; visibility: hidden;" id='zakljucan' value="<?php echo $zakljucan ?>" />
+                <input type='text' name='aktiviran' style="display: none; visibility: hidden;" id='aktiviran' value="<?php echo $aktiviran ?>" />
+                
                 <input name="promijeni" type="submit" id="submit_btn" value="Promijeni" class="gumb" />
             </form>
+            
             <?php
                 if ($korisnik->get_vrsta() == ADMINISTRATOR) {
                     if($aktiviran == "1"){
@@ -403,8 +409,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         $aktiviran = 0;
                     }  else {
                         $textNaAktivaciji = "Aktiviraj";
-                        $aktiviran = 1;
+                        $aktiviran = 1; 
                     }
+                    
+                if($zakljucan == "1"){
+                        $textNaZakljucavanju = "Otključaj";
+                        $zakljucan = 0;
+                    }  else {
+                        $textNaZakljucavanju = "Zaključaj";
+                        $zakljucan = 1;
+                        
+                    }    
+                //druga forma    
                     echo "<form action='deaktivacijaAktivacija.php' method='post' name='registracija2' id='obrazac2' enctype='multipart/form-data' >";    
                     
                     echo '<input type="text" name="idKorisnika" id="idKorisnika" '
@@ -420,8 +436,22 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     . "id='aktiviranPromjena' readonly='' value='$aktiviran' /><br />";
                     
                     echo "</form>";
-                
+                //treća forma
+                    echo "<form action='zakljucavanjeOtkljucavanje.php' method='post' name='registracija3' id='obrazac3' enctype='multipart/form-data' >";    
                     
+                    echo '<input type="text" name="idKorisnika" id="idKorisnika" '
+                        . "value='$idKorisnika' style='display: none; visibility: hidden' /><br />";
+                    
+                    echo "<input name='aktiviraj' type='submit' id='aktiviraj_btn' "
+                    . "value='$textNaZakljucavanju' class='gumb' />";
+                    
+                    echo '<input type="text" hidden="" name="kor_ime" id="kor_ime" title="pet ili više znakova"'
+                         . "value='$korIme' /><br />";
+                    
+                    echo "<input type='text' hidden='' name='zakljucanPromjena' "
+                    . "id='zakljucanPromjena' readonly='' value='$zakljucan' /><br />";
+                    
+                    echo "</form>";
                     
                     }
                 
