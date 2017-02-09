@@ -91,6 +91,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <link rel="stylesheet" type="text/css" media="screen and (min-width:451px) and (max-width: 800px)" href="css/drazovko_tablet.css" />
         <link rel="stylesheet" type="text/css" media="screen and (min-width:801px) and (max-width: 1000px)" href="css/drazovko_pc.css" />
         <link rel="stylesheet" type="text/css" media="screen and (min-width:1001px)" href="css/drazovko_tv.css" />
+    
+        
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
     </head>
     <body>
         <header id="zaglvalje">
@@ -119,7 +123,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     <label for="lozinka">Lozinka: </label>
                     <input type="password" name="lozinka" id="lozinka" required=""
                            placeholder="Lozinka"/><br />
-                    <label></label><a name="zaboravljenaL" id="zaboravljenaL" href="">Zaboravljena lozinka</a><br><br />
+                    <label></label><a name="zaboravljenaL" id="zaboravljenaL" href="javascript:zaboravljenaLozinka()">Zaboravljena lozinka</a><br><br />
                     <label for="zapamti">Zapamti me: </label>
                     
                     <input type="checkbox" name="zapamti_me" id="zapamti" value="da"/><br />
