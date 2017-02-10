@@ -289,3 +289,12 @@ table{
     border-width: 2px;
     
 }
+
+#custom-handle, #custom-handle2{
+    width: 3em;
+    height: 1.6em;
+    top: 20%;
+    margin-top: -.8em;
+    text-align: center;
+    line-height: 1.6em;
+  }

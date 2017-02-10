@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if ($korisnik->get_status() == 1) {
         session_start();
         $_SESSION["WebDiP2014x074"] = $korisnik;
-        $adresa = 'http://' . $dir . 'index.php';
+        $adresa = 'http://' . $dir . 'pocetnaRegKor.php';
         dnevnik_zapis("Uspješno logiranje");
         header("Location: $adresa");
         exit();

@@ -52,6 +52,10 @@ class Korisnik {
         return $this->status;
     }
 
+    public function get_idKorisnika(){
+        return $this->idKorisnika;
+    }
+
     public function get_kor_ime() {
         return $this->kor_ime;
     }
