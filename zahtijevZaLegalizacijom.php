@@ -38,6 +38,15 @@ dnevnik_zapis("Zahtijev za legalizacijom");
             <ul>
                 <li><a href="pocetnaRegKor.php">Početna</a></li>
                 <li><a href="zahtijevZaLegalizacijom.php">Obrazac</a></li>
+                <?php
+                if ($korisnik->get_vrsta() == ADMINISTRATOR) {
+                    echo '<li><a href="popis_korisnika.php">Korisnici</a></li>';
+                    echo '<li><a href="http://arka.foi.hr/PzaWeb/PzaWeb2004/config/vrijeme.html" '
+                    . 'target="_blank">Postavi vrijeme sustava</a></li>';  
+                    
+                }
+                ?>
+                <li><a href="detalji_korisnikaADM.php">Detalji korisika</a></li>
                 <li><a href="logout.php">Odjava</a></li>
             </ul>
         </nav>

@@ -29,10 +29,8 @@ dnevnik_zapis("Popis svih korisnika");
         </header>
         <nav id="meni">
             <ul>
-                <li><a href="index.php">Početna stranica</a></li>
-                <li><a href="osobna.html">O meni</a></li>
-                <li><a href="registracija.php">Registracija</a></li>
-                <li><a href="prijava.php">Prijava</a></li>
+                <li><a href="pocetnaRegKor.php">Početna</a></li>
+                <li><a href="zahtijevZaLegalizacijom.php">Obrazac</a></li>
                 <?php
                 if ($korisnik->get_vrsta() == ADMINISTRATOR) {
                     echo '<li><a href="popis_korisnika.php">Korisnici</a></li>';
@@ -42,7 +40,7 @@ dnevnik_zapis("Popis svih korisnika");
                 }
                 ?>
                 <li><a href="detalji_korisnikaADM.php">Detalji korisika</a></li>
-                <li><a href="http://www.foi.unizg.hr" target="_blank">Foi web</a></li>
+                <li><a href="logout.php">Odjava</a></li>
     
             </ul>
         </nav>

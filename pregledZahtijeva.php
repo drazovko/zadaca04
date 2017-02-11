@@ -67,8 +67,9 @@ dnevnik_zapis("Pregled zahtijeva za legalizacijom");
             <label for="korIme">Korisničko ime: </label>
             <input type="text" name="korIme" id="korIme" readonly="" value="<?php 
             echo "- - - " . $korisnik->get_kor_ime(). " - - -"?>"><br><br>
-            
-            
+            <div id="tuto"></div><br><br>
+            <div id="tuto2"></div><br><br>
+            <div id="greske"></div>
             <button >Pošalji zahtijev na obradu</button>
             </div>
             
