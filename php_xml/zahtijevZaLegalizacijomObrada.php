@@ -28,7 +28,7 @@ $dbc = new baza();
 
 $sql = "INSERT INTO `zahtijev_za_legalizacijom`(idkorisnik_podnositelj_zahtj, "
         . "idkorisnik_moderator, datum_podnosenja, status_idstatus, adresa, `županija_idžupanije`, "
-        . "`površina_parcele`, `površina_stamb_prost`) VALUES ('$IdKor', '$idGradjevinara', '$datumDanas', 4, "
+        . "`površina_parcele`, `površina_stamb_prost`) VALUES ('$IdKor', '$idGradjevinara', '$datumDanas', 1, "
         . "'$adresa', '$zupanija', '$parcela', '$kuca')";
 
  $rezultatUpita = $dbc->selectUpit($sql);

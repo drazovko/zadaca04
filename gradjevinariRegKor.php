@@ -1,7 +1,7 @@
 <?php
 include_once('aplikacijskiOkvir/aplikacijskiOkvir.php');
 $korisnik = provjeraKorisnika();
-dnevnik_zapis("Zahtijev za legalizacijom");
+dnevnik_zapis("Pregled zahtijeva za legalizacijom");
 ?>
 <!DOCTYPE html>
 <html>
@@ -26,7 +26,8 @@ dnevnik_zapis("Zahtijev za legalizacijom");
    <script src="http://datatables.net/download/build/nightly/jquery.dataTables.js"></script>
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.13/css/dataTables.jqueryui.min.css"/>
     <!--    <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"/>-->
-       
+   
+    <link rel="stylesheet" type="text/css" href="css/drazovko_tables.css"/>
     </head>
     <body>
         <header id="zaglvalje" >
@@ -53,7 +54,7 @@ dnevnik_zapis("Zahtijev za legalizacijom");
             </ul>
         </nav>
         <section id="sadržaj">
-            <h1>Obrazac zahtijeva za legalizacijom</h1>
+            <h1>Pregled svih građevinara</h1>
             
             <form action="" method="post" name="registracija" id="obrazac" enctype="multipart/form-data" >    
             
@@ -70,37 +71,25 @@ dnevnik_zapis("Zahtijev za legalizacijom");
             </p> 
             <hr>
             <br><br><br>
+            
             <label></label>
             <input type="text" name="IdKor" id="IdKor" readonly="" hidden="" value="<?php 
             echo $korisnik->get_idKorisnika()?>"><br><br>
             <label for="korIme">Korisničko ime: </label>
-            <input type="text" name="korIme" id="korIme" readonly="" value="<?php 
+            <input type="text" disabled="" name="korIme" id="korIme" readonly="" value="<?php 
             echo "- - - " . $korisnik->get_kor_ime(). " - - -"?>"><br><br>
-            <label for="zupanije">Županija: </label>
-            <select name="zupanija"  id="zupanije" >
-                <!--<option value="-1" selected="selected" >-- Odaberi županiju --</option>-->
-            </select><br><br>
-            <div id="tuto"></div><br><br><br>
-            <label for="adresa" >Adresa: </label>
-            <textarea name="adresa" id="adresa" rows="2" cols="30" ></textarea><br><br /><br>
-            
-            <article><div name="slider" id="slider">
-            <div id="custom-handle" class="ui-slider-handle"></div>
-            </div>
-            </article>
-            <label>Površina parcele: </label><br><br><br><br>
-            
-            <div name="slider2" id="slider2">
-            <div id="custom-handle2" class="ui-slider-handle"></div>
-            </div>
-            <label>Površina kuće: </label><br><br>
-            <div class="widget">
-                <div id="greske"><h1 id="slanjeZahtijeva">Slanje zahtijeva</h1>
+            <div id="tuto"></div><br><br>
+            <div id="greske"></div><h1 id="slanjeZahtijeva">Pregled građevinara</h1>
                     <p id="prica"></p></div><br>
-            <button >Pošalji zahtijev na obradu</button>
-            </div>
+            <div id="tuto5"></div><br><br>
+            <div id="tuto6"></div><br><br>
+            <div id="tuto2"></div><br><br>
+            <div id="tuto3"></div><br><br>
+            <div id="tuto4"></div><br><br>
+            </form>
+            <section id="uvod" style="width: 87%">
             
-            
+        </section>
         </section>
         
         <footer id="footer">
@@ -117,6 +106,6 @@ dnevnik_zapis("Zahtijev za legalizacijom");
             </address>
         </footer>
         <!--<script src="https://code.jquery.com/jquery-1.10.2.js"></script>-->
-        <script src="js/zahtijevZaLegalizacijom.js" ></script> 
+        <script src="js/gradjevinariRegKor.js" ></script> 
     </body>
 </html>

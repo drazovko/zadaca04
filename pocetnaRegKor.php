@@ -35,6 +35,8 @@ dnevnik_zapis("Početak aplikacije RegKor");
             <ul>
                 <li><a href="pocetnaRegKor.php">Početna</a></li>
                 <li><a href="zahtijevZaLegalizacijom.php">Obrazac</a></li>
+                <li><a href="pregledZahtijeva.php">Zahtijevi</a></li>
+                <li><a href="gradjevinariRegKor.php">Građevinari</a></li>
                 <?php
                 if ($korisnik->get_vrsta() == ADMINISTRATOR) {
                     echo '<li><a href="popis_korisnika.php">Korisnici</a></li>';

@@ -38,7 +38,17 @@ dnevnik_zapis("Pregled zahtijeva za legalizacijom");
             <ul>
                 <li><a href="pocetnaRegKor.php">Početna</a></li>
                 <li><a href="zahtijevZaLegalizacijom.php">Obrazac</a></li>
-                <li><a href="pregledZahtijeva.php">Pregled</a></li>
+                <li><a href="pregledZahtijeva.php">Zahtijevi</a></li>
+                <li><a href="gradjevinariRegKor.php">Građevinari</a></li>
+                <?php
+                if ($korisnik->get_vrsta() == ADMINISTRATOR) {
+                    echo '<li><a href="popis_korisnika.php">Korisnici</a></li>';
+                    echo '<li><a href="http://arka.foi.hr/PzaWeb/PzaWeb2004/config/vrijeme.html" '
+                    . 'target="_blank">Postavi vrijeme sustava</a></li>';  
+                    
+                }
+                ?>
+                <li><a href="detalji_korisnikaADM.php">Detalji korisika</a></li>
                 <li><a href="logout.php">Odjava</a></li>
             </ul>
         </nav>
@@ -65,14 +75,16 @@ dnevnik_zapis("Pregled zahtijeva za legalizacijom");
             <input type="text" name="IdKor" id="IdKor" readonly="" hidden="" value="<?php 
             echo $korisnik->get_idKorisnika()?>"><br><br>
             <label for="korIme">Korisničko ime: </label>
-            <input type="text" name="korIme" id="korIme" readonly="" value="<?php 
+            <input type="text" disabled="" name="korIme" id="korIme" readonly="" value="<?php 
             echo "- - - " . $korisnik->get_kor_ime(). " - - -"?>"><br><br>
             <div id="tuto"></div><br><br>
+            <div id="greske"></div><h1 id="slanjeZahtijeva">Pregled zahtijeva</h1>
+                    <p id="prica"></p></div><br>
+            <div id="tuto5"></div><br><br>
+            <div id="tuto6"></div><br><br>
             <div id="tuto2"></div><br><br>
-            <div id="greske"></div>
-            <button >Pošalji zahtijev na obradu</button>
-            </div>
-            
+            <div id="tuto3"></div><br><br>
+            <div id="tuto4"></div><br><br>
             </form>
             <section id="uvod" style="width: 87%">
             

@@ -52,7 +52,7 @@ function puniIzbornikZupanijama()
             //isprazniIzbornik(izbornikID);
             $(xml).find('name').each(function() {
                 $(izbornikID).append('<option value="' + $(this).attr('sifra') + '">' +
-                   $(this).text() + '</option>');
+                $(this).text() + '</option>');
             });
         }
     });
