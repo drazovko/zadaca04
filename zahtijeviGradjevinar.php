@@ -1,7 +1,11 @@
 <?php
 include_once('aplikacijskiOkvir/aplikacijskiOkvir.php');
 $korisnik = provjeraKorisnika();
-dnevnik_zapis("Početak aplikacije RegKor");
+dnevnik_zapis("Građevinar - Pregled zahtijeva");
+if ($korisnik->get_vrsta() != ADMINISTRATOR && $korisnik->get_vrsta() != MODERATOR) {
+    header("Location: error.php?e=2");
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -9,21 +13,24 @@ dnevnik_zapis("Početak aplikacije RegKor");
         <title>Početna stranica</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
-        <meta name="application-name" content="početna stranica">
+        <meta name="application-name" content="zahtijev za legalizacijom">
         <meta name="author" content="Dragan Zovko">
-        <meta name="description" content="datum_kreiranja: 17.1.2017.">
+        <meta name="description" content="datum_kreiranja: 9.2.2017.">
         <link rel="stylesheet" type="text/css" href="css/drazovko.css"/>
         <link rel="stylesheet" type="text/css" media="screen and (max-width: 450px)" href="css/drazovko_mobitel.css" />
         <link rel="stylesheet" type="text/css" media="screen and (min-width:451px) and (max-width: 800px)" href="css/drazovko_tablet.css" />
         <link rel="stylesheet" type="text/css" media="screen and (min-width:801px) and (max-width: 1000px)" href="css/drazovko_pc.css" />
         <link rel="stylesheet" type="text/css" media="screen and (min-width:1001px)" href="css/drazovko_tv.css" />
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<!--    <link rel="stylesheet" href="/resources/demos/style.css"> -->  
+         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
    
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-        <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-        <script src="http://datatables.net/download/build/nightly/jquery.dataTables.js"></script>
+   <script src="http://datatables.net/download/build/nightly/jquery.dataTables.js"></script>
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.13/css/dataTables.jqueryui.min.css"/>
-        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"/>
-        
+    <!--    <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"/>-->
+    <link rel="stylesheet" type="text/css" href="css/drazovko_tables.css"/>
     </head>
     <body>
         <header id="zaglvalje" >
@@ -37,6 +44,7 @@ dnevnik_zapis("Početak aplikacije RegKor");
                 <li><a href="zahtijevZaLegalizacijom.php">Obrazac</a></li>
                 <li><a href="pregledZahtijeva.php">Zahtijevi</a></li>
                 <li><a href="gradjevinariRegKor.php">Građevinari</a></li>
+                
                 <?php
                 if ($korisnik->get_vrsta() == ADMINISTRATOR || $korisnik->get_vrsta() == MODERATOR) {
                     echo '<li><a href="zahtijeviGradjevinar.php">Zahtijevi građevinar</a></li>';
@@ -55,11 +63,12 @@ dnevnik_zapis("Početak aplikacije RegKor");
             </ul>
         </nav>
         <section id="sadržaj">
-            <h1>Županije i građevinari</h1>
+            <h1>Pregled zahtijeva za legalizacijom</h1>
             
-            <form action="" method="post" name="registracija" id="obrazac" enctype="multipart/form-data" > 
+            <form action="" method="post" name="registracija" id="obrazac" enctype="multipart/form-data" >    
+            
             <p class="header_poruka">
-                Korisnik <b><?php echo $korisnik->get_ime_prezime()?></b> 
+                Korisnik <b><?php echo $korisnik->get_ime_prezime() ?></b> 
                 je prijavljen od: <?php echo $korisnik->get_prijavljen_od() .
             " i aktivan : " . $korisnik->get_aktivan() . " sek";
             ?>
@@ -70,14 +79,28 @@ dnevnik_zapis("Početak aplikacije RegKor");
                  je bila: <?php echo $korisnik->get_posljednja_uspjesna_prijava() ?>
             </p> 
             <hr>
-            <h3>Popis županija</h3>
-            <p>Odabirom županije vidi se popis građevinara sa brojem koliko ima 
-                ukupno postavljenih videa, slika i dokumenata.</p><br>
-                <label for="zupanija">Županija: </label>
-                <select name="zupanija" id="zupanije" size="5">
-                    <option value="-1" selected="selected" >-- Odaberi županiju --</option>
-                </select><br><br>
-                
+            <br><br><br>
+            
+            <label></label>
+            <input type="text" name="IdKor" id="IdKor" readonly="" hidden="" value="<?php 
+            echo $korisnik->get_idKorisnika()?>"><br><br>
+            <label for="korIme">Korisničko ime: </label>
+            <input type="text" disabled="" name="korIme" id="korIme" readonly="" value="<?php 
+            echo "- - - " . $korisnik->get_kor_ime(). " - - -"?>"><br><br>
+            <a id="a2" href="javascript:popisZupanija()"><h3>Popis županija za koje je nadležan reg. korisnik i zahtijeva za iste županije</h3></a>
+            <div id="tuto"></div><br><br>
+            <div id="greske"></div><h1 id="slanjeZahtijeva">Pregled zahtijeva</h1>
+                    <p id="prica"></p></div><br>
+            <div id="tuto5"></div><br><br>
+            <div id="tuto6">
+                <a id="a3" href="javascript:popisZahtijeva()"><h3>Popis svih zahtjeva za koje je nadležan reg. korisnik gurpirano po statusu</h3></a>
+            </div><br><br>
+            <div id="tuto2"></div><br><br>
+            <div id="tuto3"></div><br><br>
+            <div id="tuto4"></div><br><br>
+            <div id="tuto7"></div><br><br>
+            <div id="tuto8"></div><br><br>
+            <div id="tuto9"></div><br><br>
             </form>
             <section id="uvod" style="width: 87%">
             
@@ -98,6 +121,6 @@ dnevnik_zapis("Početak aplikacije RegKor");
             </address>
         </footer>
         <!--<script src="https://code.jquery.com/jquery-1.10.2.js"></script>-->
-        <script src="js/pocetna_stranica_jquery.js" ></script> 
+        <script src="js/zahtijeviGradjevinar.js" ></script> 
     </body>
 </html>

@@ -17,3 +17,11 @@ label{
     
     
 }
+
+table > tbody tr:hover{
+    color: #ccc;
+    background-color: #f23f37;
+    border: red outset;
+    border-width: 5px;
+    
+}

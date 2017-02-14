@@ -42,6 +42,9 @@ dnevnik_zapis("Pregled zahtijeva za legalizacijom");
                 <li><a href="pregledZahtijeva.php">Zahtijevi</a></li>
                 <li><a href="gradjevinariRegKor.php">Građevinari</a></li>
                 <?php
+                if ($korisnik->get_vrsta() == ADMINISTRATOR || $korisnik->get_vrsta() == MODERATOR) {
+                    echo '<li><a href="zahtijeviGradjevinar.php">Zahtijevi građevinar</a></li>';
+                }
                 if ($korisnik->get_vrsta() == ADMINISTRATOR) {
                     echo '<li><a href="popis_korisnika.php">Korisnici</a></li>';
                     echo '<li><a href="http://arka.foi.hr/PzaWeb/PzaWeb2004/config/vrijeme.html" '

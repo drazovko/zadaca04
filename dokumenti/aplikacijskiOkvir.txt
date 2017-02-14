@@ -1,0 +1,22 @@
+autentikacija.php –Autentikacija sessionom  return korisnik sa posetiranim statusom
+	ako korisnik postoji u bazi status = 1
+	
+provjeraKorisnika.php – Provjera korisnika (da li je prijavljen) i ima li ulogu
+
+error.php – Pogreška
+
+index.php – Prijavljivanje korisnika
+
+login.php – Autentikacija cookiem???
+
+logout.php – Odjavljivanje iz aplikacije
+
+include_once('aplikacijskiOkvir.php');
+$korisnik = provjeraKorisnika();
+dnevnik_zapis("Uspješna autorizacija");
+
+
+include_once('aplikacijskiOkvir.php');
+provjeraUloge(ADMINISTRATOR);
+dnevnik_zapis("Uspješna autorizacija");
+zatvoriBazuPodataka();
