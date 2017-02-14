@@ -118,7 +118,7 @@ function prihvatiZahtijev(){
 }
 
 function akcija_9() {
-                $('#a1').css('position', 'absolute')
+                $('#a1, #a8').css('position', 'absolute')
                         .animate(
                         {
                             opacity: 0,
@@ -219,7 +219,40 @@ function popisZahtijeva(){
 }
 
 function postaviStatusObradjen(){
-    
+    akcija_9();
+    console.log("U funkciji sam 2 postaviStatusObradjen!");
+    console.log(idZahtijeva, IdKor);
+  $.ajax(
+            {
+                type: "GET",
+                url: "php_xml/zahtijevGradjevinarStatusObradjen.php",
+                dataType: 'xml',
+                data:{
+                    'idZahtijeva': idZahtijeva,
+                    'idKor': IdKor
+                },
+                success: function (data) {
+                    console.log("U funkciji sam 3 prihvatiZahtijev!");
+                    var potvrdaObrade = $(data).find('obradjen').text();
+                    console.log("Obrađen = " + potvrdaObrade);
+                    if(potvrdaObrade != 1){
+                        $('#prica').html("Zahtijev nije upisan u bazu podataka!<hr>");
+                    }
+                    else{
+                        $("#prica").html("<br>Zahtijev za legalizaciju je u statusu obrađen!<hr><br>");
+                        $('#prica').css("background-color", "yellow");
+                        $('#prica').css("background-color", "aqua");
+                        $("#prica").effect("highlight", 3000);
+                        popisZahtijeva();
+                        $('#greske').html('');
+                         
+                    } 
+                },  
+                error: function (data) {
+                    console.log("Greška u komunikaciji . . ."); 
+                    $('#greske').html("Greška u komunikaciji . . .");
+                }
+            }); 
 }
 
 function postaviSlike(){
