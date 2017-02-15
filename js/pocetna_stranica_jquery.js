@@ -11,16 +11,6 @@ $("#zupanije").on( "click", testSlova);
 var vrijednost = $("#zupanije").val();
 console.log(vrijednost);
 
-if ($("options").valueOf() > 0) {
-    notify();
-}
-
-
-
-function notify() {
-  alert( "clicked" );
-}
-
 function akcija_5() {
                 $('<br>').insertAfter('a[id*=v_]:even');
                 }
@@ -63,7 +53,7 @@ function puniIzbornikZupanijama()
 function puniTablicuGradjevinarima(izbornikID)
 {
     var tablica = $('<table id="tablica" class="display" cellspacing="0" width="100%">');
-        tablica.append('<thead><tr><th class="prvi_stupac">Ime</th><th class="drugi_stupac">Prezime</th><th>IDZupanije</th></tr></thead>');
+        tablica.append('<thead><tr><th class="prvi_stupac">Ime</th><th class="drugi_stupac">Prezime</th><th>Zahtijevi</th><th>Slike</th><th>Video</th><th>Dokumenti</th></tr></thead>');
         console.log("Radi");
     
     $.ajax({
@@ -80,6 +70,11 @@ function puniTablicuGradjevinarima(izbornikID)
                 red += '<td>' + $(this).attr('ime') + '</td>';
                 red += '<td>' + $(this).attr('prezime') + '</td>';
                 red += '<td>' + $(this).text() + '</td>';
+                red += '<td>' + $(this).attr('slikaPoGradjevinaru') + '</td>';
+                red += '<td>' + $(this).attr('videaPoGradjevinaru') + '</td>';
+                red += '<td>' + $(this).attr('dokumenataPoGradjevinaru') + '</td>';
+                
+                
                 red += '</tr>';
                 tbody.append(red);
             });
