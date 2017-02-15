@@ -1,0 +1,30 @@
+body 
+{ 
+	background: white;	
+	color: black; 
+        background-image: none;
+}
+p {
+	color: red;
+}
+.slika
+{ 
+	display: none;
+	visibility: hidden;
+        
+}
+
+#meni, #zaglvalje, #footer { 
+	display: none;
+	visibility: hidden;
+}
+
+
+form, #uvod, #osobna_stranica, #erapodloga {
+    
+    page-break-before: always;
+    float: none;
+    
+    
+}
+

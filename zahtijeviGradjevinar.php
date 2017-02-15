@@ -16,6 +16,7 @@ if ($korisnik->get_vrsta() != ADMINISTRATOR && $korisnik->get_vrsta() != MODERAT
         <meta name="application-name" content="zahtijev za legalizacijom">
         <meta name="author" content="Dragan Zovko">
         <meta name="description" content="datum_kreiranja: 9.2.2017.">
+        <link type="text/css" rel="stylesheet" media="print" href="css/pisac.css">
         <link rel="stylesheet" type="text/css" href="css/drazovko.css"/>
         <link rel="stylesheet" type="text/css" media="screen and (max-width: 450px)" href="css/drazovko_mobitel.css" />
         <link rel="stylesheet" type="text/css" media="screen and (min-width:451px) and (max-width: 800px)" href="css/drazovko_tablet.css" />
