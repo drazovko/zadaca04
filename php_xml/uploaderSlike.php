@@ -47,12 +47,24 @@
             echo 'Problem: datoteka nije jpg ili png slika - ' . $userfile_name;
             exit;
         }
-
+/*
+        $uri = $_SERVER["REQUEST_URI"];
+        echo $uri . "<br>";
+        $pos = strrpos($uri, "/");
+        echo $pos . "<br>";
+        $uri = substr($uri, 0, $pos);
+        echo $uri . "<br>";
+        $pos = strrpos($uri, "/");
+        echo $pos . "<br>";
+        
+        $dir = $_SERVER["SERVER_NAME"] . substr($uri, 0, $pos + 1);
+        echo $dir . "<br>";
+  */      
 // put the file where we'd like it
         $upfile1 = 'img2/' . $userfile_name;
         $upfile = '../';
         $upfile .= $upfile1;
-
+        //$upfile = $dir . 'img2/' . $userfile_name;
 // is_uploaded_file and move_uploaded_file added at version 4.0.3
         if (is_uploaded_file($userfile)) {
             if (!move_uploaded_file($userfile, $upfile)) {
