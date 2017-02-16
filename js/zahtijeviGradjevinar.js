@@ -6,6 +6,7 @@ var komentarRegKor = "";
 var imeGradjevinara = "";
 var prezimeGradjevinara = "";
 var ocjenaGradjevinara;
+var sviMailovi = "";
 $("#a2").on('click', popisZupanija());
 function popisZupanija() {
     console.log("U funkciji sam 2 popisZupanija!");
@@ -152,6 +153,7 @@ function popisZahtijeva(){
                 success: function (data) {
                     console.log("U funkciji sam 3 popisZahtijeva!");
                     var tbody = $("<tbody>");
+                    
                     $(data).find('name').each(function() {
                     var red = '<tr>';
                     red += '<td class="prvi_stupac">' + $(this).attr('zahtijev') + '</td>';
@@ -165,6 +167,7 @@ function popisZahtijeva(){
                     red += '<td class="deveti_stupac">' + $(this).attr('mail') + '</td>';
                     red += '</tr>';
                     tbody.append(red);
+                    sviMailovi += $(this).attr('mail') + ', ';
                     });
                     tbody.append("</tbody>");
                     tablica.append(tbody);
@@ -220,6 +223,17 @@ function popisZahtijeva(){
             });
 }
 
+function posaljiMailSvimKorisnicima(){
+    $('#tuto10').html('<label class="mailLabel" for="mailTo">Prema:</label>' + "\n" +
+                '<input type="text" name="mailTo" id="mailTo" value="' + sviMailovi + '">' + "\n" +
+                '<label class="mailLabel" for="naslov">Naslov:</label>' + "\n" +
+                '<input type="text" name="naslov" id="naslovMaila" value="Probni naslov">' + "\n" +
+                '<label class="mailLabel" for="sadrzajMaila">Sadržaj:</label>' + "\n" +
+                '<textarea name="sadrzajMaila" id="sadrzajMaila" rows="8" cols="30"></textarea>');
+    $('#tuto10').append('<p align="center"><a id="a8" href="javascript:posaljiPopunjeniMail()">Pošalji!</a></p><br>');
+    $('#tuto10').css("background-color", "aqua");
+}
+
 function posaljiMailOdabranomKorisniku(){
     $('#tuto10').html('<label class="mailLabel" for="mailTo">Prema:</label>' + "\n" +
                 '<input type="text" name="mailTo" id="mailTo" value="' + mailKorisnika + '">' + "\n" +
@@ -228,11 +242,12 @@ function posaljiMailOdabranomKorisniku(){
                 '<label class="mailLabel" for="sadrzajMaila">Sadržaj:</label>' + "\n" +
                 '<textarea name="sadrzajMaila" id="sadrzajMaila" rows="8" cols="30"></textarea>');
     $('#tuto10').append('<p align="center"><a id="a8" href="javascript:posaljiPopunjeniMail()">Pošalji!</a></p><br>');
+    $('#tuto10').css("background-color", "aqua");
 }
 
 function posaljiPopunjeniMail(){
     
-    mail_to = mailKorisnika;
+    mail_to = $('#mailTo').val();
     mail_from = "From: WebDiP_2014@foi.hr";
     mail_subject = $('#naslovMaila').val();
     mail_body = $('#sadrzajMaila').val();
@@ -252,7 +267,7 @@ function posaljiPopunjeniMail(){
                     'mail_body': mail_body            
                 },
                 success: function (data) {
-                    console.log("U funkciji sam 3!");
+                    console.log("U funkciji sam 3 slanjeMaila!");
                     var potvrdaObrade = $(data).find('obradjen').text();
                     console.log("Obrađen = " + potvrdaObrade);
                     if(potvrdaObrade != 1){
