@@ -150,11 +150,15 @@ function ispisSlikaPoIdZahtijeva(){
                     var brojac = 0;
                     $(data).find('name').each(function() {
                         brojac++;
-                        $('#tuto2').append('<img src="' + $(this).text() + '" alt="' + $(this).attr('imeslike') + '" width="30%">');   
+                        $('#tuto2').append('<a href="' + $(this).text() + '" target="_blank"><img class="slikeZathijeva" src="' + $(this).text() + '" alt="' + $(this).attr('imeslike') + '" width="26%"></a>'); 
+                        $('.slikeZathijeva').css('margin', '20px 30px 20px 5px');
+                        //$('#tuto2').append('<a href="' + $(this).text() + '">' + $(this).attr('imeslike') + '</a>');
                     });
                     if (brojac === 0) {
-                        $('#tuto2').append('<h4 align="center">Nema postavljenih slika!</h4><br><br>');
+                        $('#tuto2').append('<h4 align="center">Nema postavljenih slika!</h4><br><hr>');
                     }
+                    
+                    $('#tuto2').append('<br><hr>');
                 },  
                 error: function (data) {
                     console.log("Greška u komunikaciji . . ."); 
@@ -183,11 +187,16 @@ function ispisVideaPoIdZahtijeva(){
                     var brojac = 0;
                     $(data).find('name').each(function() {
                         brojac++;
-                        $('#tuto3').append('<a href="' + $(this).text() + '">Prijava legalizacije video: ' + $(this).attr('imeVidea') + '</a>');   
+                        
+                        $('#tuto3').append('<a href="' + $(this).text() + '" target="_blank">Prijava legalizacije video: ' + $(this).attr('imeVidea') + '</a><br><br>');  
+                        $('#tuto3').append('<video width="400" controls>' + "\n" + '<source src="' + $(this).text() + '" type="video/mp4"><source src="mov_bbb.ogg" type="video/ogg">Your browser does not support HTML5 video.</video><br><br><br><br>');
+                        
+                        
                     });
                     if (brojac === 0) {
-                        $('#tuto3').append('<h4 align="center">Nema postavljenih videa!</h4><br><br>');
+                        $('#tuto3').append('<h4 align="center">Nema postavljenih videa!</h4><br><hr>');
                     }
+                    $('#tuto3').append('<br><hr>');
                 },  
                 error: function (data) {
                     console.log("Greška u komunikaciji . . ."); 
@@ -214,11 +223,12 @@ function ispisDokumenataPoIdZahtijeva(){
                     var brojac = 0;
                     $(data).find('name').each(function() {
                         brojac++;
-                        $('#tuto4').append('<a href="' + $(this).text() + '" target="_blank">Prijava legalizacije dokument: ' + $(this).attr('imeDokumenta') + '</a>');   
+                        $('#tuto4').append('<a href="' + $(this).text() + '" target="_blank">Prijava legalizacije dokument: ' + $(this).attr('imeDokumenta') + '</a><br><br>');   
                     });
                     if (brojac === 0) {
-                        $('#tuto4').append('<h4 align="center">Nema postavljenih dokumenata!</h4><br><br>');
+                        $('#tuto4').append('<h4 align="center">Nema postavljenih dokumenata!</h4><br><hr>');
                     }
+                    $('#tuto4').append('<br><hr>');
                 },  
                 error: function (data) {
                     console.log("Greška u komunikaciji . . ."); 

@@ -138,7 +138,7 @@ function popisZahtijeva(){
     
    
     var tablica = $('<table id="tablica2" class="display" cellspacing="0" width="100%">');
-        tablica.append('<thead><tr><th class="prvi_stupac">ID</th><th class="drugi_stupac">Kor.ime</th><th>Datum podn.</th><th>Status</th><th>Adr.</th><th>Žup.</th><th>P.</th><th>K.</th></tr></thead>');
+        tablica.append('<thead><tr><th class="prvi_stupac">ID</th><th class="drugi_stupac">Kor.ime</th><th>Datum podn.</th><th>Status</th><th>Adr.</th><th>Žup.</th><th class="sedmi_stupac">P.</th><th class="osmi_stupac">K.</th><th class="deveti_stupac">email podn. zaht.</th></tr></thead>');
         console.log("Radi");
   $.ajax(
             {
@@ -160,10 +160,9 @@ function popisZahtijeva(){
                     red += '<td >' + $(this).attr('status') + '</td>';
                     red += '<td >' + $(this).attr('adresa') + '</td>';
                     red += '<td >' + $(this).attr('zupanija') + '</td>';
-                    red += '<td >' + $(this).attr('parcela') + '</td>';
-                    
-                    
-                    red += '<td >' + $(this).text() + '</td>';
+                    red += '<td class="sedmi_stupac">' + $(this).attr('parcela') + '</td>';
+                    red += '<td class="osmi_stupac">' + $(this).text() + '</td>';
+                    red += '<td class="deveti_stupac">' + $(this).attr('mail') + '</td>';
                     red += '</tr>';
                     tbody.append(red);
                     });
@@ -193,9 +192,10 @@ function popisZahtijeva(){
                         statusZahtijeva = $(this).children('td:eq(3)').text();
                         $('#greske').html("Status zahtijeva: " + statusZahtijeva);
                         idZahtijeva = $(this).children('td:eq(0)').text();
-                        
+                        mailKorisnika = $(this).children('td:eq(8)').text();
                         console.log(idZahtijeva);
-                         
+                        console.log(mailKorisnika);
+                        
                         ispisSlikaPoIdZahtijeva();
                         ispisVideaPoIdZahtijeva();
                         ispisDokumenataPoIdZahtijeva();
@@ -207,7 +207,9 @@ function popisZahtijeva(){
                             $('#tuto4').append('<a id="a6" href="javascript:postaviVideo()">Postavite video za projekt!</a> \n');
                             $('#tuto4').append('  -  ');
                             $('#tuto4').append('<a id="a7" href="javascript:postaviDokumente()">Postavite dokumente za projekt!</a> \n<br><br>');
-                            $('#tuto4').append('<p align="center"><a id="a8" href="javascript:postaviStatusObradjen()">Postavite status dokumenta na obrađen!</a></p> \n<br><br>');
+                            $('#tuto4').append('<p align="center"><a id="a8" href="javascript:postaviStatusObradjen()">Postavite status dokumenta na obrađen!</a></p> \n<br>');
+                            $('#tuto4').append('<p align="center"><a id="a8" href="javascript:posaljiMailOdabranomKorisniku()">Pošalji mail odabranom korisniku!</a></p> \n<br>');
+                            $('#tuto4').append('<p align="center"><a id="a8" href="javascript:posaljiMailSvimKorisnicima()">Pošalji mail svim podnositeljima zahtijeva!</a></p> \n<br><br>');
                         }
                    });      
                 },  
@@ -216,6 +218,59 @@ function popisZahtijeva(){
                     $('#greske').html("Greška u komunikaciji . . .");
                 }
             });
+}
+
+function posaljiMailOdabranomKorisniku(){
+    $('#tuto10').html('<label class="mailLabel" for="mailTo">Prema:</label>' + "\n" +
+                '<input type="text" name="mailTo" id="mailTo" value="' + mailKorisnika + '">' + "\n" +
+                '<label class="mailLabel" for="naslov">Naslov:</label>' + "\n" +
+                '<input type="text" name="naslov" id="naslovMaila" value="Probni naslov">' + "\n" +
+                '<label class="mailLabel" for="sadrzajMaila">Sadržaj:</label>' + "\n" +
+                '<textarea name="sadrzajMaila" id="sadrzajMaila" rows="8" cols="30"></textarea>');
+    $('#tuto10').append('<p align="center"><a id="a8" href="javascript:posaljiPopunjeniMail()">Pošalji!</a></p><br>');
+}
+
+function posaljiPopunjeniMail(){
+    
+    mail_to = mailKorisnika;
+    mail_from = "From: WebDiP_2014@foi.hr";
+    mail_subject = $('#naslovMaila').val();
+    mail_body = $('#sadrzajMaila').val();
+    $('#tuto10').append(mail_to);
+    $('#tuto10').append(mail_from);
+    $('#tuto10').append(mail_subject);
+    $('#tuto10').append(mail_body);
+    $.ajax(
+            {
+                type: "GET",
+                url: "php_xml/slanjeMaila.php",
+                dataType: 'xml',
+                data:{ 
+                    'mail_to': mail_to,
+                    'mail_from': mail_from,
+                    'mail_subject': mail_subject,
+                    'mail_body': mail_body            
+                },
+                success: function (data) {
+                    console.log("U funkciji sam 3!");
+                    var potvrdaObrade = $(data).find('obradjen').text();
+                    console.log("Obrađen = " + potvrdaObrade);
+                    if(potvrdaObrade != 1){
+                        $('#tuto10').html("Mail nije poslan!<hr>");
+                    }
+                    else{
+                        $("#tuto10").html("<br>Mail je poslan!<hr><br><br>");
+                        $('#tuto10').css("background-color", "yellow");
+                        $('#tuto10').css("background-color", "aqua");
+                        $("#tuto10").effect("highlight", 3000);
+                    } 
+                },  
+                error: function (data) {
+                    console.log("Greška u komunikaciji . . ."); 
+                    $('#tuto10').html("Greška u komunikaciji . . .");
+                }
+            }
+        );
 }
 
 function postaviStatusObradjen(){
@@ -287,11 +342,15 @@ function ispisSlikaPoIdZahtijeva(){
                     var brojac = 0;
                     $(data).find('name').each(function() {
                         brojac++;
-                        $('#tuto7').append('<img src="' + $(this).text() + '" alt="' + $(this).attr('imeslike') + '" width="30%">');   
+                        $('#tuto7').append('<a href="' + $(this).text() + '" target="_blank"><img class="slikeZathijeva" src="' + $(this).text() + '" alt="' + $(this).attr('imeslike') + '" width="26%"></a>'); 
+                        $('.slikeZathijeva').css('margin', '20px 30px 20px 5px');
+                        //$('#tuto2').append('<a href="' + $(this).text() + '">' + $(this).attr('imeslike') + '</a>');
                     });
                     if (brojac === 0) {
-                        $('#tuto7').append('<h4 align="center">Nema postavljenih slika!</h4><br><br>');
+                        $('#tuto7').append('<h4 align="center">Nema postavljenih slika!</h4><br><hr>');
                     }
+                    
+                    $('#tuto7').append('<br><hr>');
                 },  
                 error: function (data) {
                     console.log("Greška u komunikaciji . . ."); 
@@ -304,7 +363,7 @@ function ispisSlikaPoIdZahtijeva(){
 
 
 function ispisVideaPoIdZahtijeva(){
-    console.log("U funkciji sam 22!");
+  console.log("U funkciji sam 22!");
   $.ajax(
             {
                 type: "GET",
@@ -320,11 +379,16 @@ function ispisVideaPoIdZahtijeva(){
                     var brojac = 0;
                     $(data).find('name').each(function() {
                         brojac++;
-                        $('#tuto8').append('<a href="' + $(this).text() + '">Prijava legalizacije video: ' + $(this).attr('imeVidea') + '</a>');   
+                        
+                        $('#tuto8').append('<a href="' + $(this).text() + '" target="_blank">Prijava legalizacije video: ' + $(this).attr('imeVidea') + '</a><br><br>');  
+                        $('#tuto8').append('<video width="400" controls>' + "\n" + '<source src="' + $(this).text() + '" type="video/mp4"><source src="mov_bbb.ogg" type="video/ogg">Your browser does not support HTML5 video.</video><br><br><br><br>');
+                        
+                        
                     });
                     if (brojac === 0) {
-                        $('#tuto8').append('<h4 align="center">Nema postavljenih videa!</h4><br><br>');
+                        $('#tuto8').append('<h4 align="center">Nema postavljenih videa!</h4><br><hr>');
                     }
+                    $('#tuto8').append('<br><hr>');
                 },  
                 error: function (data) {
                     console.log("Greška u komunikaciji . . ."); 
@@ -351,11 +415,12 @@ function ispisDokumenataPoIdZahtijeva(){
                     var brojac = 0;
                     $(data).find('name').each(function() {
                         brojac++;
-                        $('#tuto9').append('<a href="' + $(this).text() + '" target="_blank">Prijava legalizacije dokument: ' + $(this).attr('imeDokumenta') + '</a>');   
+                        $('#tuto9').append('<a href="' + $(this).text() + '" target="_blank">Prijava legalizacije dokument: ' + $(this).attr('imeDokumenta') + '</a><br><br>');   
                     });
                     if (brojac === 0) {
-                        $('#tuto9').append('<h4 align="center">Nema postavljenih dokumenata!</h4><br><br>');
+                        $('#tuto9').append('<h4 align="center">Nema postavljenih dokumenata!</h4><br><hr>');
                     }
+                    $('#tuto9').append('<br><hr>');
                 },  
                 error: function (data) {
                     console.log("Greška u komunikaciji . . ."); 

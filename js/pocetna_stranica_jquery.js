@@ -53,7 +53,7 @@ function puniIzbornikZupanijama()
 function puniTablicuGradjevinarima(izbornikID)
 {
     var tablica = $('<table id="tablica" class="display" cellspacing="0" width="100%">');
-        tablica.append('<thead><tr><th class="prvi_stupac">Ime</th><th class="drugi_stupac">Prezime</th><th>Zahtijevi</th><th>Slike</th><th>Video</th><th>Dokumenti</th></tr></thead>');
+        tablica.append('<thead><tr><th class="prvi_stupac">Ime</th><th class="drugi_stupac">Prezime</th><th>Zaht.</th><th>Slike</th><th>Video</th><th>Dok.</th></tr></thead>');
         console.log("Radi");
     
     $.ajax({
@@ -67,8 +67,8 @@ function puniTablicuGradjevinarima(izbornikID)
             var tbody = $("<tbody>");
             $(xml).find('name').each(function() {
                 var red = '<tr>';
-                red += '<td>' + $(this).attr('ime') + '</td>';
-                red += '<td>' + $(this).attr('prezime') + '</td>';
+                red += '<td class="prvi_stupac">' + $(this).attr('ime') + '</td>';
+                red += '<td class="drugi_stupac">' + $(this).attr('prezime') + '</td>';
                 red += '<td>' + $(this).text() + '</td>';
                 red += '<td>' + $(this).attr('slikaPoGradjevinaru') + '</td>';
                 red += '<td>' + $(this).attr('videaPoGradjevinaru') + '</td>';

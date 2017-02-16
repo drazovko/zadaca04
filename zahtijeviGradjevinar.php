@@ -97,6 +97,7 @@ if ($korisnik->get_vrsta() != ADMINISTRATOR && $korisnik->get_vrsta() != MODERAT
             <div id="tuto2"></div><br><br>
             <div id="tuto3"></div><br><br>
             <div id="tuto4"></div><br><br>
+            <div id="tuto10"></div><br><br>
             <div id="tuto7"></div><br><br>
             <div id="tuto8"></div><br><br>
             <div id="tuto9"></div><br><br>

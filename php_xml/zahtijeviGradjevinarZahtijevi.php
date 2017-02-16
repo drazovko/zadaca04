@@ -9,7 +9,7 @@ $dbc = new baza();
 
 $sql = "SELECT `idzahtijeva`, korisnik.kor_ime, `datum_podnosenja`, status.naziv, "
         . "zahtijev_za_legalizacijom.adresa, županija.naziv, `površina_parcele`, "
-        . "`površina_stamb_prost`, `ocjena`, `komentar` "
+        . "`površina_stamb_prost`, korisnik.email, `ocjena`, `komentar` "
         . "FROM `zahtijev_za_legalizacijom` JOIN korisnik "
         . "ON zahtijev_za_legalizacijom.idkorisnik_podnositelj_zahtj = korisnik.idkorisnik "
         . "JOIN status ON zahtijev_za_legalizacijom.status_idstatus = status.idstatus "
@@ -37,7 +37,7 @@ if ($brojRedova) {
         $output .= '<name zahtijev="' . $row[0] . '" korIme="' . $row[1] 
                 . '" datum="' . $row[2] . '" status="' . $row[3] 
                 . '" adresa="' . $row[4] . '" zupanija="' . $row[5] 
-                . '" parcela="' . $row[6] . '">' . $row[7] . '</name>' . "\n";
+                . '" parcela="' . $row[6] . '" mail="' . $row[8] . '">' . $row[7] . '</name>' . "\n";
     }
 }
 $output .= '</zahtijevi>';

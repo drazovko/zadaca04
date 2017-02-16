@@ -18,6 +18,11 @@ label{
     
 }
 
+.mailLabel{
+    width: 25%;
+    float: left;
+}
+
 table > tbody tr:hover{
     color: #ccc;
     background-color: #f23f37;
