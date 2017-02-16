@@ -11,7 +11,7 @@ $(function () {
     
    
     var tablica = $('<table id="tablica" class="display" cellspacing="0" width="100%">');
-        tablica.append('<thead><tr><th class="prvi_stupac">Ime građ.</th><th class="drugi_stupac">Prezime građ.</th><th>Br. zahtijeva</th><th>Ocjena</th></tr></thead>');
+        tablica.append('<thead><tr><th class="prvi_stupac">Ime građ.</th><th class="drugi_stupac">Prezime građ.</th><th>Ukupno br. zahtijeva</th><th>Prosječna ocjena</th></tr></thead>');
         console.log("Radi");
   $.ajax(
             {
@@ -27,10 +27,10 @@ $(function () {
                     var tbody = $("<tbody>");
                     $(data).find('name').each(function() {
                     var red = '<tr>';
-                    red += '<td class="prvi_stupac">' + $(this).attr('imeGradjevinara') + '</td>';
+                    red += '<td class="prvi_stupac">' + $(this).attr('ime') + '</td>';
                     red += '<td class="drugi_stupac">' + $(this).attr('prezime') + '</td>';
-                    red += '<td>' + $(this).attr('zahtijev') + '</td>';
-                    red += '<td>' + $(this).text() + '</td>';
+                    red += '<td>' + $(this).attr('zahtijevaPoGradjevinaru') + '</td>';
+                    red += '<td>' + $(this).attr('prosjecnaOcjenaPoGradjevinaru') + '</td>';
                     red += '</tr>';
                     tbody.append(red);
                     });
