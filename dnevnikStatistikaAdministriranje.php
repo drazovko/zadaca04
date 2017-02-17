@@ -1,11 +1,9 @@
 <?php
-include_once('aplikacijskiOkvir/aplikacijskiOkvir.php');
-$korisnik = provjeraKorisnika();
-dnevnik_zapis("Građevinar - Pregled zahtijeva");
-if ($korisnik->get_vrsta() != ADMINISTRATOR && $korisnik->get_vrsta() != MODERATOR) {
-    header("Location: error.php?e=2");
-    exit();
-}
+include 'aplikacijskiOkvir/aplikacijskiOkvir.php';
+
+$korisnik = provjeraUloge(ADMINISTRATOR);                          
+dnevnik_zapis("Pregled dnevnika");
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -13,9 +11,9 @@ if ($korisnik->get_vrsta() != ADMINISTRATOR && $korisnik->get_vrsta() != MODERAT
         <title>Početna stranica</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
-        <meta name="application-name" content="zahtijev za legalizacijom">
+        <meta name="application-name" content="popis korisnika">
         <meta name="author" content="Dragan Zovko">
-        <meta name="description" content="datum_kreiranja: 9.2.2017.">
+        <meta name="description" content="datum_kreiranja: 12.1.2017.">
         <link type="text/css" rel="stylesheet" media="print" href="css/pisac.css">
         <link rel="stylesheet" type="text/css" href="css/drazovko.css"/>
         <link rel="stylesheet" type="text/css" media="screen and (max-width: 450px)" href="css/drazovko_mobitel.css" />
@@ -35,9 +33,10 @@ if ($korisnik->get_vrsta() != ADMINISTRATOR && $korisnik->get_vrsta() != MODERAT
     </head>
     <body>
         <header id="zaglvalje" >
+            
             <img src="img/logo.png" alt="foi logo" id="logo" />
             <p id="header_naslov">Legalizacija</p>
-            <p align="right"><a href="logout.php">Odjava </a></p> 
+            <p align="right"><a href="logout.php">Odjava </a></p>
         </header>
         <nav id="meni">
             <ul>
@@ -45,13 +44,10 @@ if ($korisnik->get_vrsta() != ADMINISTRATOR && $korisnik->get_vrsta() != MODERAT
                 <li><a href="zahtijevZaLegalizacijom.php">Obrazac</a></li>
                 <li><a href="pregledZahtijeva.php">Zahtijevi</a></li>
                 <li><a href="gradjevinariRegKor.php">Građevinari</a></li>
-                
                 <?php
                 if ($korisnik->get_vrsta() == ADMINISTRATOR || $korisnik->get_vrsta() == MODERATOR) {
                     echo '<li><a href="zahtijeviGradjevinar.php">Zahtijevi građevinar</a></li>';
                 }
-                ?>
-                <?php
                 if ($korisnik->get_vrsta() == ADMINISTRATOR) {
                     echo '<li><a href="popis_korisnika.php">Korisnici</a></li>';
                     echo '<li><a href="postaviVrijemeSustava.php">Postavi vrijeme sustava</a></li>';
@@ -60,54 +56,43 @@ if ($korisnik->get_vrsta() != ADMINISTRATOR && $korisnik->get_vrsta() != MODERAT
                 ?>
                 <li><a href="detalji_korisnikaADM.php">Detalji korisika</a></li>
                 <li><a href="logout.php">Odjava</a></li>
+    
             </ul>
         </nav>
         <section id="sadržaj">
-            <h1>Pregled zahtijeva za legalizacijom</h1>
+            <h1>Administratorski poslovi</h1>
+            <section id="uvod">
+                <?php
+                $vrijemeServera =  time();
+                $vrijemeVirtulanoDate = date('d.m.Y H:i:s', $virtualnoVrijemeSustava);
+                echo 'Stvarno vrijeme servera: '. date('d.m.Y H:i:s', $vrijemeServera) . "<br>";
+                echo 'Virtualno vrijeme sustava: ' . $vrijemeVirtulanoDate . " i pomak je: " . $sati22 . " sati";
+                ?>
+            <h2 align="center" class="podnaslov">Pregled dnevnika:</h2>
+            <a id="a2" href="javascript:dnevnik()"><h3>Pregled i pretraživanje dnevnika</h3></a>
+            <a id="a3" href="javascript:statistikaDnevnika()"><h3>Statistika dnevnika</h3></a>
             
-            <form action="" method="post" name="registracija" id="obrazac" enctype="multipart/form-data" >    
             
-            <p class="header_poruka">
-                Korisnik <b><?php echo $korisnik->get_ime_prezime() ?></b> 
-                je prijavljen od: <?php echo $korisnik->get_prijavljen_od() .
-            " i aktivan : " . $korisnik->get_aktivan() . " sek";
-            ?>
-            </p>
-            <p class="header_poruka">
-                Posljednja uspješna prijava korisnika 
-                <b><?php echo $korisnik->get_ime_prezime()?></b>
-                 je bila: <?php echo $korisnik->get_posljednja_uspjesna_prijava() ?>
-            </p> 
-            <hr>
-            <br><br><br>
+            <label>Korisnik:</label>
+            <input name="korisnik" id="korisnik"><br>
+                <?php
+                
+                $poc = date('Y-m') . "-01";
+                $zav = date('Y-m-d');
+                ?>
+            Od datuma: <input name = "odDatuma" id="odDatuma" type="date"value="<?php echo $poc; ?>"><br>
+            Do datuma: <input name = "doDatuma" id="doDatuma" type="date"value="<?php echo $zav; ?>"><br>
+            <label for="prijave">Prijave: </label>
+            <input type="radio" name="prijave" id="ispravnePr" class="točke" value="1">Ispravne
+            <input type="radio"  name="prijave" id="pogresnePr"  class="točke" value="0">Pogrešne
+            <hr><br> 
+            <div id="tuto2"></div>
+            <div id="tuto1"></div><hr><br>
+            <h2 align="center" class="podnaslov">Aplikativna statistika:</h2>
+            </section>
             
-            <label></label>
-            <input type="text" name="IdKor" id="IdKor" readonly="" hidden="" value="<?php 
-            echo $korisnik->get_idKorisnika()?>"><br><br>
-            <label for="korIme">Korisničko ime: </label>
-            <input type="text" disabled="" name="korIme" id="korIme" readonly="" value="<?php 
-            echo "- - - " . $korisnik->get_kor_ime(). " - - -"?>"><br><br>
-            <a id="a2" href="javascript:popisZupanija()"><h3>Popis županija za koje je nadležan reg. korisnik i zahtijeva za iste županije</h3></a>
-            <div id="tuto"></div><br><br>
-            <div id="greske"></div><h1 id="slanjeZahtijeva">Pregled zahtijeva</h1>
-                    <p id="prica"></p></div><br>
-            <div id="tuto5"></div><br><br>
-            <div id="tuto6">
-                <a id="a3" href="javascript:popisZahtijeva()"><h3>Popis svih zahtjeva za koje je nadležan reg. korisnik gurpirano po statusu</h3></a>
-            </div><br><br>
-            <div id="tuto2"></div><br><br>
-            <div id="tuto3"></div><br><br>
-            <div id="tuto4"></div><br><br>
-            <div id="tuto10"></div><br><br>
-            <div id="tuto7"></div><br><br>
-            <div id="tuto8"></div><br><br>
-            <div id="tuto9"></div><br><br>
-            </form>
-            <section id="uvod" style="width: 87%">
-            
-        </section>
-        </section>
-        
+        </section>  
+           
         <footer id="footer">
             <address>
                 Kontakt:
@@ -121,7 +106,6 @@ if ($korisnik->get_vrsta() != ADMINISTRATOR && $korisnik->get_vrsta() != MODERAT
             
             </address>
         </footer>
-        <!--<script src="https://code.jquery.com/jquery-1.10.2.js"></script>-->
-        <script src="js/zahtijeviGradjevinar.js" ></script> 
+        <script src="js/dnevnikStatistikaAdministriranje.js" ></script> 
     </body>
 </html>

@@ -48,6 +48,7 @@ dnevnik_zapis("Zahtijev za legalizacijom");
                 if ($korisnik->get_vrsta() == ADMINISTRATOR) {
                     echo '<li><a href="popis_korisnika.php">Korisnici</a></li>';
                     echo '<li><a href="postaviVrijemeSustava.php">Postavi vrijeme sustava</a></li>';
+                    echo '<li><a href="dnevnikStatistikaAdministriranje.php">Dnevnik</a></li>';
                 }
                 ?>
                 <li><a href="detalji_korisnikaADM.php">Detalji korisika</a></li>

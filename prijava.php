@@ -5,7 +5,7 @@ include 'aplikacijskiOkvir/aplikacijskiOkvir.php';
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $brojac = 1 + $_POST['brojac'];
-    dnevnik_zapis("Pokušaj prijave br.$brojac");
+    
     $korIme = $_POST['kor_ime'];
     $lozinka = $_POST['lozinka'];
     $vrijednostKukija = "";
@@ -32,10 +32,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         session_start();
         $_SESSION["WebDiP2014x074"] = $korisnik;
         $adresa = 'http://' . $dir . 'pocetnaRegKor.php';
+        
         dnevnik_zapis("Uspješno logiranje");
         header("Location: $adresa");
         exit();
     } else {
+        dnevnik_zapis("Pokušaj prijave br.$brojac");
         if ($korisnik->get_status() == 6) {
             $greske = "Korisnik je blokiran.</br>";
             $brojac = 1;
@@ -65,7 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 }  else {
     $greske = "";
     $brojac = 1;
-    dnevnik_zapis("Pokušaj prijave br.$brojac");
+    //dnevnik_zapis("Pokušaj prijave br.$brojac");
     if (isset($_COOKIE['WebDiP2014x074'])) {
         $vrijednostKukija = $_COOKIE['WebDiP2014x074'];
     }  else {

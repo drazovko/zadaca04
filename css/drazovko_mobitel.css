@@ -69,3 +69,9 @@ select, textarea, input{
  .prvi_stupac, .drugi_stupac{
      visibility: visible;
  }
+ 
+ form, #uvod, #osobna_stranica, #erapodloga {
+    
+    float: none;
+    
+}
