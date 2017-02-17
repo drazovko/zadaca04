@@ -140,7 +140,114 @@ function statistikaDnevnika(){
                     $('#greske').html("Greška u komunikaciji . . .");
                 }
             });
-    
-    
-    
     }
+    
+    //Aplikativna statistika dio !!!
+    
+$("#zupanije").one( "click", puniIzbornikZupanijama);
+$("#zupanije").on( "click", testSlova);
+
+var vrijednost = $("#zupanije").val();
+console.log(vrijednost);
+
+function testSlova(){
+    var izbornikID = $("#zupanije");
+    $(izbornikID).css('color', 'green');
+    var vrijednost = $("#zupanije").val();
+    console.log(vrijednost);
+    if (vrijednost > 0) {
+        console.log("Dinamo!");
+        puniTablicuGradjevinarima(vrijednost);
+    }
+}
+
+function isprazniIzbornik(izbornikID)
+{
+    $(izbornikID).children().remove();
+}
+
+function puniIzbornikZupanijama()
+{
+    var izbornikID = $("#zupanije");
+    $.ajax({
+        url: 'php_xml/pocetna_stranica_jquery.php',
+        type: 'GET',
+        dataType: 'xml',
+        success: function(xml) {
+            //isprazniIzbornik(izbornikID);
+            $(xml).find('name').each(function() {
+                $(izbornikID).append('<option value="' + $(this).attr('sifra') + '">' +
+                $(this).text() + '</option>');
+            });
+        }
+    });
+}
+
+function puniTablicuGradjevinarima(izbornikID)
+{
+    var tablica = $('<table id="tablica3" class="display" cellspacing="0" width="100%">');
+        tablica.append('<thead><tr><th class="prvi_stupac">Ime</th><th class="drugi_stupac">Prezime</th><th>Zaht.</th><th>Video</th><th>Ocj.</th></tr></thead>');
+        console.log("Radi");
+    
+    $.ajax({
+        url: "php_xml/dnevnikStatistikaAplikativna.php",
+        type: 'GET',
+        dataType: 'xml',
+        data:{
+            'idZupanije': izbornikID
+        },
+        success: function(xml) {
+            var tbody = $("<tbody>");
+            var brojZaht;
+            var brojVidea = 0;
+            var brojZahtijeva = 0;
+            $(xml).find('name').each(function() {
+                var red = '<tr>';
+                red += '<td class="prvi_stupac">' + $(this).attr('ime') + '</td>';
+                red += '<td class="drugi_stupac">' + $(this).attr('prezime') + '</td>';
+                red += '<td>' + $(this).text() + '</td>';               
+                red += '<td>' + $(this).attr('videaPoGradjevinaru') + '</td>';               
+                red += '<td>' + $(this).attr('ocjenaPoGradjevinaru') + '</td>';               
+                red += '</tr>';
+                brojZaht = $(this).attr('ukupnoZahtijeva');
+                brojVidea = $(this).attr('videaPoZupaniji');
+                tbody.append(red);
+            });
+                       
+        tbody.append("</tbody>");
+        tablica.append(tbody);
+               
+        $('#tuto3').html(tablica);
+        $('#tablica3').dataTable(
+            {
+             "aaSorting": [[0, "asc"],[1,"asc"]],
+             "bPaginate": true,
+             "bLengthChange": true,
+             "bFilter":true,
+             "bSort":true,
+             "bInfo":true,
+             "bAutoWidth":true
+            });
+            
+        var tablica4 = $('<table id="tablica4" class="display" cellspacing="0" width="100%">');
+        tablica4.append('<thead><tr><th class="prvi_stupac">-</th><th class="drugi_stupac">Zaht.</th><th>Video</th></tr></thead>');
+        var tbody4 = $('<tbody id="tbody4">');
+        var red4 = '<tr><td>Ukupno po županiji:</td><td>' + brojZaht + '</td><td>' + brojVidea + '</td></tr>';
+        tbody4.append(red4);
+        tbody4.append("</tbody>");
+        tablica4.append(tbody4);
+            
+        $('#tuto4').html(tablica4);
+        $('#tablica4').dataTable(
+            {
+             "aaSorting": [[0, "asc"],[1,"asc"]],
+             "bPaginate": true,
+             "bLengthChange": true,
+             "bFilter":true,
+             "bSort":true,
+             "bInfo":true,
+             "bAutoWidth":true
+            });
+        }
+    });
+}

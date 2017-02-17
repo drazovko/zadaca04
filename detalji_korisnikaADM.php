@@ -453,7 +453,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     echo "<input type='text' hidden='' name='zakljucanPromjena' "
                     . "id='zakljucanPromjena' readonly='' value='$zakljucan' /><br />";
                     
+                    
+                    
                     echo "</form>";
+                    
+                    
                     
                     }
                 

@@ -89,6 +89,13 @@ dnevnik_zapis("Pregled dnevnika");
             <div id="tuto2"></div>
             <div id="tuto1"></div><hr><br>
             <h2 align="center" class="podnaslov">Aplikativna statistika:</h2>
+            <h4 align="center">Broj zahtijeva po županiji i/ili moderatoru</h4>
+            <label for="zupanija">Županija: </label>
+                <select name="zupanija" id="zupanije" >
+                    <option value="-1" selected="selected" >-- Odaberi županiju --</option>
+                </select><br><br>
+            <div id="tuto3"></div>
+            <div id="tuto4"></div>
             </section>
             
         </section>  
