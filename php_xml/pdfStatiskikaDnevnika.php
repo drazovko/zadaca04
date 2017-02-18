@@ -57,21 +57,69 @@ if (!$rezultatUpita) {
     }
 
 
-$output = '<?xml version="1.0" encoding="utf-8" standalone="yes"?>' . "\n";
-$output .= '<zahtijevi>';
-
 $brojRedova = $rezultatUpita->num_rows;
 
-if ($brojRedova) {
-    while ($row = $rezultatUpita->fetch_row()) {
-        $output .= '<name korisnik="' . $row[0] . '" broj="' . $row[1] 
-                 . '">' . $row[1] . '</name>' . "\n";
-    }
+$vrijeme = date("d.m.Y H:i:s");
+
+
+$p = PDF_new();
+
+/*  open new PDF file; insert a file name to create the PDF on disk */
+if (PDF_begin_document($p, "", "") == 0) {
+    die("Error: " . PDF_get_errmsg($p));
 }
-$output .= '</zahtijevi>';
 
-header("Content-Type: text/xml");
-print $output;
+PDF_set_info($p, "Creator", "pdfStatiskikaDnevnika.php");
+PDF_set_info($p, "Author", "Jura Drugi");
+PDF_set_info($p, "Title", "Statiskika dnevnika!");
 
-//. '" preglednik="' . $row[5] 
-  //. '" skripta="' . $row[3]       
+PDF_begin_page_ext($p, 595, 842, "");
+
+$font = PDF_load_font($p, "Helvetica-Bold", "winansi", "");
+PDF_setfont($p, $font, 20.0);
+PDF_set_text_pos($p, 80, 750);
+PDF_show($p, "Statistika dnevnika - " . $vrijeme);
+
+
+if ($prijave == "Uspje%") {
+        $prijave = "uspjesnih";
+    }  else {
+        $prijave = "neuspjesnih";
+    }
+$textPdf = "Pregled " . $prijave . " prijava na sustav po odabranom korisniku i vremenskom periodu.";
+PDF_setfont($p, $font, 12.0);
+PDF_set_text_pos($p, 50, 600);
+PDF_show($p, $textPdf);
+
+
+$pozicija = 520;
+$broj = 1;
+$velicina = 20;
+$razmak = 0;
+PDF_setfont($p, $font, 14.0);
+PDF_set_text_pos($p, 60, $pozicija);
+
+
+
+
+while (list($korisnik, $ukupno) = $rezultatUpita->fetch_row()) {
+    if ($korisnik == "") {
+        $korisnik = "Nepoznati korisnici";
+    }
+  $razmak = (($broj++) * $velicina) + 10;
+  PDF_show($p, $korisnik . "  -  " . $ukupno . "  -  " . $odDatuma . "  -  " . $doDatuma);
+  PDF_set_text_pos($p, 50, $pozicija - $razmak);
+}
+
+PDF_end_page_ext($p, "");
+PDF_end_document($p, "");
+
+$buf = PDF_get_buffer($p);
+$len = strlen($buf);
+
+header("Content-type: application/pdf");
+header("Content-Length: $len");
+header("Content-Disposition: inline; filename=pdf_1.pdf");
+print $buf;
+
+PDF_delete($p);

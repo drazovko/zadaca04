@@ -69,11 +69,13 @@ dnevnik_zapis("Pregled dnevnika");
                 echo 'Virtualno vrijeme sustava: ' . $vrijemeVirtulanoDate . " i pomak je: " . $sati22 . " sati";
                 ?>
             <h2 align="center" class="podnaslov">Pregled dnevnika:</h2>
-            <a id="a2" href="javascript:dnevnik()"><h3>Pregled i pretraživanje dnevnika</h3></a>
+            
+            
+            
+            
+            <form action="php_xml/pdfStatiskikaDnevnika.php" method="get" name="pdfStatistike" id="pdfStatistike" enctype="multipart/form-data">
             <a id="a3" href="javascript:statistikaDnevnika()"><h3>Statistika dnevnika</h3></a>
-            
-            
-            <label>Korisnik:</label>
+                <label>Korisnik:</label>
             <input name="korisnik" id="korisnik"><br>
                 <?php
                 
@@ -85,17 +87,26 @@ dnevnik_zapis("Pregled dnevnika");
             <label for="prijave">Prijave: </label>
             <input type="radio" name="prijave" id="ispravnePr" class="točke" value="1">Ispravne
             <input type="radio"  name="prijave" id="pogresnePr"  class="točke" value="0">Pogrešne
-            <hr><br> 
+            <p align="right"><button type="submit" form="pdfStatistike" value="submit">PDF</button></p>
+            <hr><br>
+            </form>
+            <a id="a2" href="javascript:dnevnik()"><h3>Pregled i pretraživanje dnevnika</h3></a>
+            <label>Pretraživanje podataka iz dnevnika:</label>
+            
+            <input name="korisnik2" id="korisnik2"><br>
             <div id="tuto2"></div>
             <div id="tuto1"></div><hr><br>
+            <form action="php_xml/pdfStatistikaAplikativna.php" method="get" name="pdfAplikativni" id="pdfAplikativni" enctype="multipart/form-data">
             <h2 align="center" class="podnaslov">Aplikativna statistika:</h2>
             <h4 align="center">Broj zahtijeva po županiji i/ili moderatoru</h4>
+            <p align="right"><button type="submit" form="pdfAplikativni" value="submit">PDF</button></p>
             <label for="zupanija">Županija: </label>
                 <select name="zupanija" id="zupanije" >
                     <option value="-1" selected="selected" >-- Odaberi županiju --</option>
                 </select><br><br>
             <div id="tuto3"></div>
             <div id="tuto4"></div>
+            </form>
             </section>
             
         </section>  
