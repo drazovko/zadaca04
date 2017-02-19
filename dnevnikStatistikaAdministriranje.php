@@ -73,7 +73,7 @@ dnevnik_zapis("Pregled dnevnika");
             
             
             
-            <form action="php_xml/pdfStatiskikaDnevnika.php" method="get" name="pdfStatistike" id="pdfStatistike" enctype="multipart/form-data">
+            <form action="php_xml/pdfStatiskikaDnevnika.php" method="get" target="_blank" name="pdfStatistike" id="pdfStatistike" enctype="multipart/form-data">
             <a id="a3" href="javascript:statistikaDnevnika()"><h3>Statistika dnevnika</h3></a>
                 <label>Korisnik:</label>
             <input name="korisnik" id="korisnik"><br>
@@ -96,7 +96,7 @@ dnevnik_zapis("Pregled dnevnika");
             <input name="korisnik2" id="korisnik2"><br>
             <div id="tuto2"></div>
             <div id="tuto1"></div><hr><br>
-            <form action="php_xml/pdfStatistikaAplikativna.php" method="get" name="pdfAplikativni" id="pdfAplikativni" enctype="multipart/form-data">
+            <form action="php_xml/pdfStatistikaAplikativna.php" method="get" target="_blank" name="pdfAplikativni" id="pdfAplikativni" enctype="multipart/form-data">
             <h2 align="center" class="podnaslov">Aplikativna statistika:</h2>
             <h4 align="center">Broj zahtijeva po županiji i/ili moderatoru</h4>
             <p align="right"><button type="submit" form="pdfAplikativni" value="submit">PDF</button></p>

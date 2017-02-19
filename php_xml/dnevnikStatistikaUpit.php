@@ -45,7 +45,7 @@ $dbc = new baza();
 $sql = "SELECT `korisnik`, COUNT(`tekst`) FROM `dnevnik` "
         . "WHERE `korisnik` LIKE '" . $korIme . "' "
         . "AND `tekst` LIKE '" . $prijave . "' "
-        . "AND `stvarno_vrijeme` BETWEEN '" . $odDatuma . "' AND '" . $doDatuma . "'";
+        . "AND `stvarno_vrijeme` BETWEEN '" . $odDatuma . "' AND '" . $doDatuma . "' group by korisnik";
 
 
 $rezultatUpita = $dbc->selectUpit($sql);
