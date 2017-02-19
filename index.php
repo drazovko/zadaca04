@@ -1,6 +1,6 @@
 <?php
 include_once('aplikacijskiOkvir/aplikacijskiOkvir.php');
-$korisnik = provjeraKorisnika();
+//$korisnik = provjeraKorisnika();
 dnevnik_zapis("Početak aplikacije");
 ?>
 <!DOCTYPE html>
@@ -12,78 +12,54 @@ dnevnik_zapis("Početak aplikacije");
         <meta name="application-name" content="početna stranica">
         <meta name="author" content="Dragan Zovko">
         <meta name="description" content="datum_kreiranja: 17.1.2017.">
+        <link type="text/css" rel="stylesheet" media="print" href="css/pisac.css">
         <link rel="stylesheet" type="text/css" href="css/drazovko.css"/>
         <link rel="stylesheet" type="text/css" media="screen and (max-width: 450px)" href="css/drazovko_mobitel.css" />
         <link rel="stylesheet" type="text/css" media="screen and (min-width:451px) and (max-width: 800px)" href="css/drazovko_tablet.css" />
         <link rel="stylesheet" type="text/css" media="screen and (min-width:801px) and (max-width: 1000px)" href="css/drazovko_pc.css" />
         <link rel="stylesheet" type="text/css" media="screen and (min-width:1001px)" href="css/drazovko_tv.css" />
+   
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+        <script src="http://datatables.net/download/build/nightly/jquery.dataTables.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.13/css/dataTables.jqueryui.min.css"/>
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"/>
+        
     </head>
     <body>
         <header id="zaglvalje" >
-            
             <img src="img/logo.png" alt="foi logo" id="logo" />
             <p id="header_naslov">Legalizacija</p>
-            <p align="right"><a href="logout.php">Odjava </a></p>
-            <p class="header_poruka">
-                Pozdrav korisniku: <b>
-            <?php
-            echo $korisnik->get_ime_prezime() . " </b> koji je prijavljen od: " . $korisnik->get_prijavljen_od() .
-            " i aktivan : " . $korisnik->get_aktivan() . " sek";
-            ?>
-            </p>
-            <p class="header_poruka">
-                Posljednja uspješna prijava korisnika <b>
-            <?php
-            echo $korisnik->get_ime_prezime() . " </b> je bila: " 
-                    . $korisnik->get_posljednja_uspjesna_prijava();
-            ?>
-            </p>
+            <p align="right"><a href="prijava.php">Prijava</a></p>  
         </header>
         <nav id="meni">
             <ul>
-                <li><a href="index.php">Početna stranica</a></li>
-                <li><a href="osobna.html">O meni</a></li>
-                <li><a href="registracija.php">Registracija</a></li>
+                <li><a href="pocetna.php">Početna</a></li>
+                <li><a href="registracija.html">Registracija - klijent</a></li>
+                <li><a href="registracija.php">Registracija - server</a></li>
                 <li><a href="prijava.php">Prijava</a></li>
-                <?php
-                if ($korisnik->get_vrsta() == ADMINISTRATOR) {
-                    echo '<li><a href="popis_korisnika.php">Korisnici</a></li>';
-                    echo '<li><a href="http://arka.foi.hr/PzaWeb/PzaWeb2004/config/vrijeme.html" '
-                    . 'target="_blank">Postavi vrijeme sustava</a></li>';  
-                    
-                }
-                ?>
-                <li><a href="detalji_korisnikaADM.php">Detalji korisika</a></li>
-                <li><a href="http://www.foi.unizg.hr" target="_blank">Foi web</a></li>
-                
+                <li><a href="o_autoru.html">O meni</a></li>
+                <li><a href="dokumentacija.html">Dokumentacija</a></li>
             </ul>
         </nav>
         <section id="sadržaj">
-            <h1>Web dizajn i programiranje</h1><br>
-            <section id="uvod">
-            <h2>Osnovne informacije</h2><br>
+            <h1>Županije i građevinari</h1><br>
             
-            <h3 class="podnaslov">Cilj kolegija:</h3>
-        
-            <p class = "tekst">
-                Cilj kolegija je upoznavanje studenata s elementima dizajna web stranica i razvoja web aplikacija. Predmetom se obrađuju glavni elementi koji čine pojedinačne sastavne komponente cjelovitog projektnog rješenja na web platformi. Predmet prati moguće razine realizacije Web projekata tako da se studentima pruža uvid u različite tehnološke mogućnosti koje mogu primijeniti u konkretnim situacijama. Studenti tijekom praktičnog dijela kolegija rade vježbe kojima postepeno razvijaju pojedine gradive blokove kasnijih web stranica i aplikacija. Prezentacijom izabranih rješenja otvara se diskusija tijekom koje studenti mogu izraziti svoje mišljenje o dizajnu, dovršenosti i drugim dogovorenim kriterijima kvalitete, čime se potiče kritičko razmišljanje o tuđem i vlastitom rješenju
-            </p>
-            <h3 class="podnaslov">Ishodi učenja predmeta</h3>
-            <ul>
-                <li>analizirati opterećenje Web poslužitelja i predložiti potrebne radnje za poboljšanje njegovih performansi</li>
-                <li>izraditi Web aplikacije različite namjene i složenosti ...</li>
-                <li>razlikovati Web tehnologije</li>
-                <li>razumijeti osobine skriptnih programskih jezika i koristiti ih u realizaciji Web aplikacije</li>
-                <li>razumjeti i koristiti razne servise za potrebe Web aplikacija</li>
-                <li>razumjeti i primijeniti hipertekstualno i hipermedijsko povezivanje dokumenata</li>
-                <li>razumjeti i primijeniti preporuke Web dizajna</li>
-                <li>razumjeti i primijeniti preporuke Web inženjerstva</li>
-                <li>razumjeti način funkcioniranja Web mjesta i Web aplikacija</li>
-                <li>razumjeti osobine korisničke i poslužiteljske strane Web aplikacija te ih primijeniti na način koji odgovara specifičnostima pojedinog projekta</li>
-                <li>razumjeti principe rada Web autorskih alata i znati ih koristiti ih u razvoju Web mjesta</li>
-            </ul>
-            </section>
+            <form action="" method="post" name="registracija" id="obrazac" enctype="multipart/form-data" >    
+            <h2>Građevinari po županijama</h2>
+            <p class="tekst">Odabirom županije 
+                vidi se popis građevinara sa brojem koliko građevinar ima ukupno postavljenih 
+                videa, slika i dokumenata.</p><br>
+                <label for="zupanija">Županija: </label>
+                <select name="zupanija" id="zupanije">
+                    <option value="-1" selected="selected" >-- Odaberi županiju --</option>
+                
+                </select><br><br><br><hr>
+                <div id="mjesto1"></div>  
+            </form>
+            
         </section>
+        
         <footer id="footer">
             <address>
                 Kontakt:
@@ -97,5 +73,7 @@ dnevnik_zapis("Početak aplikacije");
             
             </address>
         </footer>
+        <!--<script src="https://code.jquery.com/jquery-1.10.2.js"></script>-->
+        <script src="js/pocetna_stranica_jquery.js" ></script> 
     </body>
 </html>

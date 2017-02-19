@@ -25,3 +25,4 @@ foreach ($params as $param) {
 $vrijemeServera = time();
 //global $virtualnoVrijemeSustava;
 $virtualnoVrijemeSustava = $vrijemeServera + ($sati22 * 60 * 60);
+//echo $virtualnoVrijemeSustava;

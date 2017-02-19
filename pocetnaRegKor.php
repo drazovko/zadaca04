@@ -71,17 +71,16 @@ dnevnik_zapis("Početak aplikacije RegKor");
             </p> 
             <hr>
             <h3>Popis županija</h3>
-            <p>Odabirom županije vidi se popis građevinara sa brojem koliko ima 
-                ukupno postavljenih videa, slika i dokumenata.</p><br>
+            <p class="tekst">Odabirom županije 
+                vidi se popis građevinara sa brojem koliko građevinar ima ukupno postavljenih 
+                videa, slika i dokumenata.</p><br>
                 <label for="zupanija">Županija: </label>
-                <select name="zupanija" id="zupanije" size="5">
+                <select name="zupanija" id="zupanije">
                     <option value="-1" selected="selected" >-- Odaberi županiju --</option>
-                </select><br><br>
-                
+                </select><br><br><br><hr>
+                <div id="mjesto1"></div> 
             </form>
-            <section id="uvod" style="width: 87%">
             
-        </section>
         </section>
         
         <footer id="footer">

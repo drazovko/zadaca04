@@ -47,7 +47,7 @@ $( function() {
   $.ajax(
             {
                 type: "GET",
-                url: "php_xml/zahtijevZaLegalizacijomObrada.php",
+                url: "zahtijevZaLegalizacijomObrada2.php",
                 dataType: 'xml',
                 data:{
                     'IdKor': IdKor,

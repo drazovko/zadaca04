@@ -19,19 +19,21 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $pos = strrpos($uri, "/");
     $dir = $_SERVER["SERVER_NAME"] . substr($uri, 0, $pos + 1);
     
-    if (isset($_POST['zapamti_me']) && $_POST['zapamti_me'] == "da") {
-        setcookie("WebDiP2014x074", $korIme);
-        $vrijednostKukija = $korIme;
-    }  else {
-        setcookie("WebDiP2014x074", $korIme, time() - 3600);
-        $vrijednostKukija = "";
-        
-    }
+    
     
     if ($korisnik->get_status() == 1) {
         session_start();
         $_SESSION["WebDiP2014x074"] = $korisnik;
         $adresa = 'http://' . $dir . 'pocetnaRegKor.php';
+        
+        if (isset($_POST['zapamti_me']) && $_POST['zapamti_me'] == "da") {
+            setcookie("WebDiP2014x074", $korIme);
+            $vrijednostKukija = $korIme;
+        }  else {
+            setcookie("WebDiP2014x074", $korIme, time() - 3600);
+            $vrijednostKukija = "";
+        
+        }
         
         dnevnik_zapis("Uspješno logiranje");
         header("Location: $adresa");

@@ -81,7 +81,7 @@ function puniTablicuGradjevinarima(izbornikID)
         tbody.append("</tbody>");
         tablica.append(tbody);
         
-        $('#uvod').html(tablica);
+        $('#mjesto1').html(tablica);
         $('#tablica').dataTable(
             {
              "aaSorting": [[0, "asc"],[1,"asc"]],

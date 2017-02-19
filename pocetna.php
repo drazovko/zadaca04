@@ -47,18 +47,16 @@ dnevnik_zapis("Početak aplikacije");
             
             <form action="" method="post" name="registracija" id="obrazac" enctype="multipart/form-data" >    
             <h2>Građevinari po županijama</h2>
-            <p>Neregistrirani korisnik  Vidi popis županija i odabirom županije 
-                vidi popis građevinara sa brojem koliko ima ukupnopostavljenih 
+            <p class="tekst">Odabirom županije 
+                vidi se popis građevinara sa brojem koliko građevinar ima ukupno postavljenih 
                 videa, slika i dokumenata.</p><br>
                 <label for="zupanija">Županija: </label>
-                <select name="zupanija" id="zupanije" size="5">
+                <select name="zupanija" id="zupanije" >
                     <option value="-1" selected="selected" >-- Odaberi županiju --</option>
-                </select><br><br>
-                
+                </select><br><br><br><hr>
+                <div id="mjesto1"></div>    
             </form>
-            <section id="uvod" style="width: 87%">
-            
-        </section>
+           
         </section>
         
         <footer id="footer">
